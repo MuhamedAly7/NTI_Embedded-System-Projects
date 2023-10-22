@@ -13,6 +13,7 @@
 #include "./../std_libraries.h"
 #include "../../PRIV/Atmega32.h"
 #include "GPIO_cfg.h"
+#include "../../math.h"
 
 /*----------------------------------------- Macros objects ------------------------------------*/
 

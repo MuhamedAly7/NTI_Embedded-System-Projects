@@ -145,7 +145,7 @@ LOAD c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a
 .rela.plt
  *(.rela.plt)
 
-.text           0x00000000     0x179e
+.text           0x00000000     0x1d74
  *(.vectors)
  .vectors       0x00000000       0x54 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib/avr5/crtm32.o
                 0x00000000                __vectors
@@ -256,49 +256,49 @@ LOAD c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a
                 0x00000b46                . = ALIGN (0x2)
  *(.text.*)
  .text.DIO_SetPinDirection
-                0x00000b46      0x2d4 ./MCAL_Layer/GPIO/GPIO.o
+                0x00000b46      0x5a6 ./MCAL_Layer/GPIO/GPIO.o
                 0x00000b46                DIO_SetPinDirection
  .text.DIO_SetPinValue
-                0x00000e1a      0x246 ./MCAL_Layer/GPIO/GPIO.o
-                0x00000e1a                DIO_SetPinValue
+                0x000010ec      0x54a ./MCAL_Layer/GPIO/GPIO.o
+                0x000010ec                DIO_SetPinValue
  .text.DIO_GetPinValue
-                0x00001060      0x226 ./MCAL_Layer/GPIO/GPIO.o
-                0x00001060                DIO_GetPinValue
+                0x00001636      0x226 ./MCAL_Layer/GPIO/GPIO.o
+                0x00001636                DIO_GetPinValue
  .text.DIO_SetPortDirection
-                0x00001286       0x3a ./MCAL_Layer/GPIO/GPIO.o
-                0x00001286                DIO_SetPortDirection
+                0x0000185c       0x3a ./MCAL_Layer/GPIO/GPIO.o
+                0x0000185c                DIO_SetPortDirection
  .text.DIO_SetPortValues
-                0x000012c0       0x3a ./MCAL_Layer/GPIO/GPIO.o
-                0x000012c0                DIO_SetPortValues
+                0x00001896       0x3a ./MCAL_Layer/GPIO/GPIO.o
+                0x00001896                DIO_SetPortValues
  .text.DIO_GetPortValues
-                0x000012fa       0x50 ./MCAL_Layer/GPIO/GPIO.o
-                0x000012fa                DIO_GetPortValues
+                0x000018d0       0x50 ./MCAL_Layer/GPIO/GPIO.o
+                0x000018d0                DIO_GetPortValues
  .text.seven_segment_initailize
-                0x0000134a       0x5c ./ECU_Layer/SevenSegment/seven_segment.o
-                0x0000134a                seven_segment_initailize
+                0x00001920       0x5c ./ECU_Layer/SevenSegment/seven_segment.o
+                0x00001920                seven_segment_initailize
  .text.seven_segment_write_number
-                0x000013a6       0xa6 ./ECU_Layer/SevenSegment/seven_segment.o
-                0x000013a6                seven_segment_write_number
+                0x0000197c       0xa6 ./ECU_Layer/SevenSegment/seven_segment.o
+                0x0000197c                seven_segment_write_number
  .text.keypad_init
-                0x0000144c       0x80 ./ECU_Layer/Keypad/keypad.o
-                0x0000144c                keypad_init
+                0x00001a22       0x80 ./ECU_Layer/Keypad/keypad.o
+                0x00001a22                keypad_init
  .text.keypad_read_value
-                0x000014cc       0xf6 ./ECU_Layer/Keypad/keypad.o
-                0x000014cc                keypad_read_value
- .text.main     0x000015c2      0x16a ./main.o
-                0x000015c2                main
- .text.libgcc   0x0000172c        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_exit.o)
- .text.libgcc   0x0000172c        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_copy_data.o)
- .text.libgcc   0x0000172c        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_clear_bss.o)
- .text.libgcc   0x0000172c       0x38 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_prologue.o)
-                0x0000172c                __prologue_saves__
- .text.libgcc   0x00001764       0x36 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_epilogue.o)
-                0x00001764                __epilogue_restores__
-                0x0000179a                . = ALIGN (0x2)
+                0x00001aa2       0xf6 ./ECU_Layer/Keypad/keypad.o
+                0x00001aa2                keypad_read_value
+ .text.main     0x00001b98      0x16a ./main.o
+                0x00001b98                main
+ .text.libgcc   0x00001d02        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_exit.o)
+ .text.libgcc   0x00001d02        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_copy_data.o)
+ .text.libgcc   0x00001d02        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_clear_bss.o)
+ .text.libgcc   0x00001d02       0x38 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_prologue.o)
+                0x00001d02                __prologue_saves__
+ .text.libgcc   0x00001d3a       0x36 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_epilogue.o)
+                0x00001d3a                __epilogue_restores__
+                0x00001d70                . = ALIGN (0x2)
  *(.fini9)
- .fini9         0x0000179a        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_exit.o)
-                0x0000179a                exit
-                0x0000179a                _exit
+ .fini9         0x00001d70        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_exit.o)
+                0x00001d70                exit
+                0x00001d70                _exit
  *(.fini9)
  *(.fini8)
  *(.fini8)
@@ -317,11 +317,11 @@ LOAD c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a
  *(.fini1)
  *(.fini1)
  *(.fini0)
- .fini0         0x0000179a        0x4 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_exit.o)
+ .fini0         0x00001d70        0x4 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_exit.o)
  *(.fini0)
-                0x0000179e                _etext = .
+                0x00001d74                _etext = .
 
-.data           0x00800060       0x30 load address 0x0000179e
+.data           0x00800060       0x30 load address 0x00001d74
                 0x00800060                PROVIDE (__data_start, .)
  *(.data)
  .data          0x00800060        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib/avr5/crtm32.o
@@ -401,8 +401,8 @@ LOAD c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a
                 0x00800091                keypad_val
  *(COMMON)
                 0x00800092                PROVIDE (__bss_end, .)
-                0x0000179e                __data_load_start = LOADADDR (.data)
-                0x000017ce                __data_load_end = (__data_load_start + SIZEOF (.data))
+                0x00001d74                __data_load_start = LOADADDR (.data)
+                0x00001da4                __data_load_end = (__data_load_start + SIZEOF (.data))
 
 .noinit         0x00800092        0x0
                 0x00800092                PROVIDE (__noinit_start, .)
@@ -427,19 +427,19 @@ LOAD c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a
 .signature
  *(.signature*)
 
-.stab           0x00000000     0x15cc
+.stab           0x00000000     0x17ac
  *(.stab)
- .stab          0x00000000      0x930 ./MCAL_Layer/GPIO/GPIO.o
- .stab          0x00000930      0x420 ./ECU_Layer/SevenSegment/seven_segment.o
-                                0x648 (size before relaxing)
- .stab          0x00000d50      0x510 ./ECU_Layer/Keypad/keypad.o
-                                0x738 (size before relaxing)
- .stab          0x00001260      0x36c ./main.o
-                                0x6c0 (size before relaxing)
+ .stab          0x00000000      0xb7c ./MCAL_Layer/GPIO/GPIO.o
+ .stab          0x00000b7c      0x414 ./ECU_Layer/SevenSegment/seven_segment.o
+                                0x63c (size before relaxing)
+ .stab          0x00000f90      0x504 ./ECU_Layer/Keypad/keypad.o
+                                0x72c (size before relaxing)
+ .stab          0x00001494      0x318 ./main.o
+                                0x660 (size before relaxing)
 
-.stabstr        0x00000000     0x1970
+.stabstr        0x00000000     0x16d7
  *(.stabstr)
- .stabstr       0x00000000     0x1970 ./MCAL_Layer/GPIO/GPIO.o
+ .stabstr       0x00000000     0x16d7 ./MCAL_Layer/GPIO/GPIO.o
 
 .stab.excl
  *(.stab.excl)

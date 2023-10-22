@@ -4,20 +4,15 @@
  *  Created on: Oct 21, 2023
  *      Author: Mohamed Aly
  */
-#include <avr/io.h>
 
-#include "./main.h"
 #include "MCAL_Layer/GPIO/GPIO.h"
 #include "MCAL_Layer/std_types.h"
-#include <util/delay.h>
-
 #include "ECU_Layer/Keypad/keypad.h"
 #include "ECU_Layer/SevenSegment/seven_segment.h"
+#include <util/delay.h>
+#include "./main.h"
 
-//GPIO_CFG_T my_pin = {.port = PORTA_INDEX,
-//					 .pin = PIN6_INDEX,
-//					 .direction = GPIO_DIRECTION_OUTPUT,
-//					 .logic = GPIO_LOW};
+
 
 PROGRAM_STATUS_T ret_status = SUCCESS;
 
@@ -83,30 +78,32 @@ GPIO_CFG_T my_pin2 = {.port = PORTA_INDEX,
 					 .direction = GPIO_DIRECTION_OUTPUT,
 					 .logic = GPIO_HIGH};
 
-u8 keypad_val = 0;
+u8 keypad_val_ones = 0;
+u8 keypad_val_tens = 0;
 
 int main()
 {
-//	ret_status = DIO_SetPinDirection(&my_pin);
 	ret_status = DIO_SetPinDirection(&my_pin1);
 	ret_status = DIO_SetPinDirection(&my_pin2);
 
-	ret_status = DIO_SetPinValue(&my_pin1, GPIO_HIGH);
-	ret_status = DIO_SetPinValue(&my_pin2, GPIO_HIGH);
+	//ret_status = DIO_SetPinValue(&my_pin1, GPIO_HIGH);
+
 	ret_status = seven_segment_initailize(&my_seg);
 	ret_status = keypad_init(&keypad);
 	while (1)
 	{
-		ret_status = keypad_read_value(&keypad, &keypad_val);
-		_delay_ms(10);
-		ret_status = seven_segment_write_number(&my_seg, keypad_val);
+		ret_status = keypad_read_value(&keypad, &keypad_val_ones);
+
+		ret_status = DIO_SetPinValue(&my_pin2, GPIO_HIGH);
+		ret_status = DIO_SetPinValue(&my_pin1, GPIO_LOW);
+		ret_status = seven_segment_write_number(&my_seg, keypad_val_ones%10);
+		_delay_ms(30);
+
+		ret_status = DIO_SetPinValue(&my_pin2, GPIO_LOW);
+		ret_status = DIO_SetPinValue(&my_pin1, GPIO_HIGH);
+		ret_status = seven_segment_write_number(&my_seg, keypad_val_ones/10);
+		_delay_ms(30);
 	}
-//	while(1){
-//		ret_status = DIO_SetPinValue(&my_pin, GPIO_HIGH);
-//		_delay_ms(500);
-//		ret_status = DIO_SetPinValue(&my_pin, GPIO_LOW);
-//		_delay_ms(500);
-//	}
 
 	return 0;
 }
