@@ -9,6 +9,8 @@
 #define ECU_LAYER_KEYPAD_KEYPAD_H_
 /*-------------------------------------Includes---------------------------------*/
 #include "../../MCAL_Layer/GPIO/GPIO.h"
+#include "keypad_cfg.h"
+#include <util/delay.h>
 
 /* ------------------------------------Macro declarations --------------------- */
 #define KEYPAD_ROWS    4
@@ -18,11 +20,20 @@
 /* ------------------------------------Macro Functions ------------------------ */
 
 /* ------------------------------------Data types ----------------------------- */
+
+// additional types
 typedef struct{
-	GPIO_CFG_T keypad_rows_pins[KEYPAD_ROWS];
-	GPIO_CFG_T keypad_columns_pins[KEYPAD_COLUMNS];
-}keypad_t;
+    u8 digits[5];
+    u8 cursor;
+}keypad_digit_t;
+
 /* ------------------------------------Function declarations ------------------- */
-PROGRAM_STATUS_T keypad_init(const keypad_t *keypad_obj);
-PROGRAM_STATUS_T keypad_read_value(const keypad_t *keypad_obj, u8 *value);
+void H_KEYPAD_void_Init(void);
+void H_KEYPAD_u8_getPressedKey(u8 * pPressedKey);
+
+
+// additional functions on keypad
+void keypad_cursor_init(keypad_digit_t *digits_obj);
+void H_KEYPAD_u8_WriteOnDigits(keypad_digit_t *digits_obj);
+
 #endif /* ECU_LAYER_KEYPAD_KEYPAD_H_ */

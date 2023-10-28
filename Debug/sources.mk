@@ -23,6 +23,10 @@ C_DEPS :=
 SUBDIRS := \
 ECU_Layer/Keypad \
 ECU_Layer/SevenSegment \
+ECU_Layer/lcd \
+MCAL_Layer/ADC \
 MCAL_Layer/GPIO \
+MCAL_Layer/interrupt \
+MCAL_Layer/timer0 \
 . \
 

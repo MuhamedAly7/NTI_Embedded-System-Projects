@@ -14,64 +14,118 @@ static const u8 btn_values[KEYPAD_ROWS][KEYPAD_COLUMNS] = {
                                                             {13, 14, 15, 16},
                                                              };
 
+static const u8 btn_values2[KEYPAD_ROWS][KEYPAD_COLUMNS] = {
+                                                            {'1', '2', '3', '4'},
+                                                            {'5', '6', '7', '8'},
+                                                            {'9', '0', '#', 'a'},
+                                                            {'b', 'c', 'd', 'e'},
+                                                             };
 
-PROGRAM_STATUS_T keypad_init(const keypad_t *keypad_obj)
+static u8 rows_pins[4] = {KEYPAD_R1_PIN, KEYPAD_R2_PIN, KEYPAD_R3_PIN, KEYPAD_R4_PIN};
+static u8 cols_pins[4] = {KEYPAD_C1_PIN, KEYPAD_C2_PIN, KEYPAD_C3_PIN, KEYPAD_C4_PIN};
+
+static u8 rows_ports[4] = {KEYPAD_R1_PORT, KEYPAD_R2_PORT, KEYPAD_R3_PORT, KEYPAD_R4_PORT};
+static u8 cols_ports[4] = {KEYPAD_C1_PORT, KEYPAD_C2_PORT, KEYPAD_C3_PORT, KEYPAD_C4_PORT};
+
+
+void H_KEYPAD_void_Init(void)
 {
-	PROGRAM_STATUS_T ret_status = SUCCESS;
-	u8 row_counter = 0;
-	u8 column_counter = 0;
-	if(NULL == keypad_obj)
-	{
-		ret_status = NULL_PTR;
-	}
-	else
-	{
-		for(row_counter = 0; row_counter < KEYPAD_ROWS; row_counter++)
-		{
-			ret_status = DIO_SetPinDirection(&(keypad_obj->keypad_rows_pins[row_counter]));
-		}
+	// initialize rows to be output mode
+	DIO_voidSetPinDirection(KEYPAD_R1_PORT, KEYPAD_R1_PIN, GPIO_DIRECTION_OUTPUT);
+	DIO_voidSetPinDirection(KEYPAD_R2_PORT, KEYPAD_R2_PIN, GPIO_DIRECTION_OUTPUT);
+	DIO_voidSetPinDirection(KEYPAD_R3_PORT, KEYPAD_R3_PIN, GPIO_DIRECTION_OUTPUT);
+	DIO_voidSetPinDirection(KEYPAD_R4_PORT, KEYPAD_R4_PIN, GPIO_DIRECTION_OUTPUT);
 
-		for(column_counter = 0; column_counter < KEYPAD_COLUMNS; column_counter++)
-		{
-			ret_status = DIO_SetPinDirection(&(keypad_obj->keypad_rows_pins[column_counter]));
-		}
-	}
-	return ret_status;
+	// initialize columns to be output mode
+	DIO_voidSetPinDirection(KEYPAD_C1_PORT, KEYPAD_R1_PIN, GPIO_DIRECTION_INPUT);
+	DIO_voidSetPinDirection(KEYPAD_C2_PORT, KEYPAD_R2_PIN, GPIO_DIRECTION_INPUT);
+	DIO_voidSetPinDirection(KEYPAD_C3_PORT, KEYPAD_R3_PIN, GPIO_DIRECTION_INPUT);
+	DIO_voidSetPinDirection(KEYPAD_C4_PORT, KEYPAD_R4_PIN, GPIO_DIRECTION_INPUT);
 }
 
-PROGRAM_STATUS_T keypad_read_value(const keypad_t *keypad_obj, u8 *value)
+void H_KEYPAD_u8_getPressedKey(u8 * pPressedKey)
 {
-	PROGRAM_STATUS_T ret_status = SUCCESS;
-		u8 l_row_counter = 0;
-		u8 l_column_counter = 0;
-		u8 l_counter = 0;
-		u8 column_logic = 0;
-		if(NULL == keypad_obj)
+	u8 l_row_counter = 0;
+	u8 l_column_counter = 0;
+	u8 l_counter = 0;
+	u8 row_logic = 1;
+	for(l_row_counter = 0; l_row_counter < KEYPAD_ROWS; l_row_counter++)
+	{
+		// Set All pins to be low at first
+		for(l_counter = 0; l_counter < KEYPAD_ROWS; l_counter++)
 		{
-			ret_status = NULL_PTR;
+			DIO_voidSetPinValue(rows_ports[l_counter], rows_pins[l_counter], GPIO_HIGH);
 		}
-		else
+
+		DIO_voidSetPinValue(rows_ports[l_row_counter], rows_pins[l_row_counter], GPIO_LOW);
+
+		_delay_ms(10);
+
+		for(l_column_counter = 0; l_column_counter < KEYPAD_COLUMNS; l_column_counter++)
 		{
-			for(l_row_counter = 0; l_row_counter < KEYPAD_ROWS; l_row_counter++)
+			row_logic = DIO_u8GetPinValue(cols_ports[l_column_counter], cols_pins[l_column_counter]);
+
+			if(row_logic == GPIO_LOW)
 			{
-				// Set All pins to be low at first
-				for(l_counter = 0; l_counter < KEYPAD_ROWS; l_counter++)
-				{
-					ret_status = DIO_SetPinValue(&(keypad_obj->keypad_rows_pins[l_counter]), GPIO_LOW);
-				}
+				*pPressedKey = btn_values[l_row_counter][l_column_counter];
+			}
+			else{/* Nothing */}
+		}
+	}
+}
 
-				ret_status = DIO_SetPinValue(&(keypad_obj->keypad_rows_pins[l_row_counter]), GPIO_HIGH);
 
-				for(l_column_counter = 0; l_column_counter < KEYPAD_COLUMNS; l_column_counter++)
-				{
-					ret_status = DIO_GetPinValue(&(keypad_obj->keypad_columns_pins[l_column_counter]), &column_logic);
 
-					if(column_logic == GPIO_HIGH)
-					{
-						*value = btn_values[l_row_counter][l_column_counter];
-					}
-				}
+/* -------------------------------------------------------------- Additional functions ----------------------------------------- */
+
+// to initialize digits
+void keypad_cursor_init(keypad_digit_t *digits_obj)
+{
+	uint8_t l_cursor = 0;
+	if(NULL != digits_obj)
+	{
+		digits_obj->cursor = 0;
+		for(l_cursor = 0; l_cursor < 5; l_cursor++)
+		{
+			digits_obj->digits[l_cursor] = 0;
+		}
+	}
+}
+
+
+void H_KEYPAD_u8_WriteOnDigits(keypad_digit_t *digits_obj)
+{
+	u8 l_row_counter = 0;
+	u8 l_column_counter = 0;
+	u8 l_counter = 0;
+	u8 row_logic = 1;
+	for(l_row_counter = 0; l_row_counter < KEYPAD_ROWS; l_row_counter++)
+	{
+		// Set All pins to be low at first
+		for(l_counter = 0; l_counter < KEYPAD_ROWS; l_counter++)
+		{
+			DIO_voidSetPinValue(rows_ports[l_counter], rows_pins[l_counter], GPIO_HIGH);
+		}
+
+		DIO_voidSetPinValue(rows_ports[l_row_counter], rows_pins[l_row_counter], GPIO_LOW);
+
+		_delay_ms(10);
+
+		for(l_column_counter = 0; l_column_counter < KEYPAD_COLUMNS; l_column_counter++)
+		{
+			row_logic = DIO_u8GetPinValue(cols_ports[l_column_counter], cols_pins[l_column_counter]);
+
+			if(row_logic == GPIO_LOW)
+			{
+				digits_obj->digits[digits_obj->cursor] = btn_values2[l_row_counter][l_column_counter];
+				digits_obj->cursor += 1;
+			}
+			else{/* Nothing */}
+
+			if(btn_values2[l_row_counter][l_column_counter] == '#')
+			{
+				digits_obj->cursor = 0;
 			}
 		}
-		return ret_status;
+	}
 }

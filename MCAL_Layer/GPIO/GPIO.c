@@ -7,93 +7,76 @@
 
 #include "GPIO.h"
 
-volatile Peripheral_t *Ports_index[NUM_PORTS] = {GPIO_PINS_A, GPIO_PINS_B, GPIO_PINS_C, GPIO_PINS_D};
+volatile DIO_t *Ports_index[NUM_PORTS] = {GPIO_PINS_A, GPIO_PINS_B, GPIO_PINS_C, GPIO_PINS_D};
 
 
-PROGRAM_STATUS_T DIO_SetPinDirection(const GPIO_CFG_T *obj)
+void DIO_voidSetPinDirection(u8 Copy_u8PortId, u8 Copy_u8PinId,  u8 Copy_u8Direction)
 {
-    PROGRAM_STATUS_T ret_status = SUCCESS;
-    if(NULL == obj)
-    {
-        ret_status = NULL_PTR;
-    }
-    else
-    {
-    	if(obj->direction == GPIO_DIRECTION_OUTPUT)
-    	{
-    		SET_BIT(Ports_index[obj->port]->DDRx, obj->pin);
-    	}
-    	else if(obj->direction == GPIO_DIRECTION_INPUT)
-    	{
-    		CLEAR_BIT(Ports_index[obj->port]->DDRx, obj->pin);
-    	}
-    	else{/* Nothing */}
-    }
-    return ret_status;
-}
-PROGRAM_STATUS_T DIO_SetPinValue(const GPIO_CFG_T *obj, Logic_t logic)
-{
-    PROGRAM_STATUS_T ret_status = SUCCESS;
-    if(NULL == obj)
-    {
-        ret_status = NULL_PTR;
-    }
-    else
-    {
-    	if(logic == GPIO_HIGH)
-    	{
-    		SET_BIT(Ports_index[obj->port]->PORTx, obj->pin);
-    	}
-    	else if(logic == GPIO_LOW)
-    	{
-    		CLEAR_BIT(Ports_index[obj->port]->PORTx, obj->pin);
-    	}
-    	else{/* Nothing */}
-    }
-    return ret_status;
-}
-PROGRAM_STATUS_T DIO_GetPinValue(const GPIO_CFG_T *obj, u8 *pin_value)
-{
-    PROGRAM_STATUS_T ret_status = SUCCESS;
-    if((NULL == obj) || (NULL == pin_value))
-    {
-        ret_status = NULL_PTR;
-    }
-    else
-    {
-    	*pin_value = READ_BIT(Ports_index[obj->port]->PINx, obj->pin);
-    }
-    return ret_status;
+	if((Copy_u8PortId <= NUM_PORTS-1) && Copy_u8PinId <= NUM_PINS-1)
+	{
+		switch(Copy_u8Direction){
+			case(GPIO_DIRECTION_OUTPUT):
+				SET_BIT(Ports_index[Copy_u8PortId]->DDRx, Copy_u8PinId);
+			break;
+			case(GPIO_DIRECTION_INPUT):
+				CLEAR_BIT(Ports_index[Copy_u8PortId]->DDRx, Copy_u8PinId);
+			break;
+		}
+	}
+	else{/* Nothing */}
 }
 
 
-PROGRAM_STATUS_T DIO_SetPortDirection(Port_index_t port_index, u8 directions)
+void DIO_voidSetPinValue(u8 Copy_u8PortId, u8 Copy_u8PinId, u8 Copy_u8Value)
 {
-    PROGRAM_STATUS_T ret_status = SUCCESS;
-    Ports_index[port_index]->DDRx = directions;
-    return ret_status;
+	if((Copy_u8PortId <= NUM_PORTS-1) && (Copy_u8PinId <= NUM_PINS-1))
+	{
+		switch(Copy_u8Value){
+		case(GPIO_HIGH):
+		SET_BIT(Ports_index[Copy_u8PortId]->PORTx, Copy_u8PinId);
+		break;
+		case(GPIO_LOW):
+		CLEAR_BIT(Ports_index[Copy_u8PortId]->PORTx, Copy_u8PinId);
+		break;
+		}
+	}
+	else{/* Nothing */}
 }
 
 
-PROGRAM_STATUS_T DIO_SetPortValues(Port_index_t port_index, u8 values)
+u8 DIO_u8GetPinValue(u8 Copy_u8PortId, u8 Copy_u8PinId)
 {
-    PROGRAM_STATUS_T ret_status = SUCCESS;
-    Ports_index[port_index]->PORTx = values;
-    return ret_status;
+	u8 ret_val = 0;
+	if((Copy_u8PortId <= NUM_PORTS-1) && (Copy_u8PinId <= NUM_PINS-1)){
+		ret_val = READ_BIT(Ports_index[Copy_u8PortId]->PINx, Copy_u8PinId);
+	}else{/* Nothing */}
+	return ret_val;
 }
 
 
-PROGRAM_STATUS_T DIO_GetPortValues(Port_index_t port_index, u8 *port_value)
+void DIO_voidSetPortDirection(u8 Copy_u8PortId,  u8 Copy_u8Direction)
 {
-    PROGRAM_STATUS_T ret_status = SUCCESS;
-    if(NULL == port_value)
-    {
-        ret_status = NULL_PTR;
-    }
-    else
-    {
-        *port_value = Ports_index[port_index]->PINx;
-    }
+	if(Copy_u8PortId <= NUM_PORTS-1){
+		Ports_index[Copy_u8PortId]->DDRx = Copy_u8Direction;
+	}
+	else{/* Nothing */}
+}
 
-    return ret_status;
+
+void DIO_voidSetPortValues(u8 Copy_u8PortId, u8 Copy_u8Value)
+{
+	if(Copy_u8PortId <= NUM_PORTS-1){
+    Ports_index[Copy_u8PortId]->PORTx = Copy_u8Value;
+	}
+	else{/* Nothing */}
+}
+
+
+u8 DIO_u8GetPortValues(u8 Copy_u8PortId)
+{
+	u8 ret_val = 0;
+	if(Copy_u8PortId <= NUM_PORTS-1){
+		ret_val = (Ports_index[Copy_u8PortId]->PINx);
+	}else{/* Nothing */}
+	return ret_val;
 }

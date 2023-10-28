@@ -16,9 +16,10 @@ typedef unsigned int   u32;
 typedef signed int     s32;
 
 /* To return the program status */
-typedef enum{
-    SUCCESS,
-    NULL_PTR
-}PROGRAM_STATUS_T;
+typedef enum {
+	NO_ERROR,
+	NULL_POINTER,
+	OUT_OF_RANGE_VALUE
+}Error_Status_t;
 
 #endif /* MCAL_LAYER_STD_TYPES_H_ */

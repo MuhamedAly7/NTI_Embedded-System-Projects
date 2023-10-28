@@ -18,6 +18,7 @@
 /*----------------------------------------- Macros objects ------------------------------------*/
 
 #define NUM_PORTS 4
+#define NUM_PINS  8
 
 /*----------------------------------------- Macros functions ----------------------------------*/
 
@@ -52,21 +53,13 @@ typedef enum{
     GPIO_HIGH
 }Logic_t;
 
-/* this struct to configure my GPIO per one pin */
-typedef struct{
-    u8 port       : 3; // receive numbers from  Port_index_t
-    u8 pin        : 3; // receive numbers from  Pin_index_t
-    u8 direction  : 1; // receive numbers from  Direction_type
-    u8 logic      : 1; // receive numbers from  Logic_t
-}GPIO_CFG_T;
-
 
 /*------------------------------------------API's------------------------------------------------*/
-PROGRAM_STATUS_T DIO_SetPinDirection(const GPIO_CFG_T *obj);
-PROGRAM_STATUS_T DIO_SetPinValue(const GPIO_CFG_T *obj, Logic_t logic);
-PROGRAM_STATUS_T DIO_GetPinValue(const GPIO_CFG_T *obj, u8 *pin_value);
-PROGRAM_STATUS_T DIO_SetPortDirection(Port_index_t port_index, u8 directions);
-PROGRAM_STATUS_T DIO_SetPortValues(Port_index_t port_index, u8 values);
-PROGRAM_STATUS_T DIO_GetPortValues(Port_index_t port_index, u8 *port_value);
+void DIO_voidSetPinDirection(u8 Copy_u8PortId, u8 Copy_u8PinId,  u8 Copy_u8Direction);
+void DIO_voidSetPinValue(u8 Copy_u8PortId, u8 Copy_u8PinId, u8 Copy_u8Value);
+u8 DIO_u8GetPinValue(u8 Copy_u8PortId, u8 Copy_u8PinId);
+void DIO_voidSetPortDirection(u8 Copy_u8PortId,  u8 Copy_u8Direction);
+void DIO_voidSetPortValues(u8 Copy_u8PortId, u8 Copy_u8Value);
+u8 DIO_u8GetPortValues(u8 Copy_u8PortId);
 
 #endif /* MCAL_LAYER_GPIO_GPIO_H_ */
