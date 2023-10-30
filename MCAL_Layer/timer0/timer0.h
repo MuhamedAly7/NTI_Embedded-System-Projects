@@ -13,6 +13,7 @@
 #include "timer0_priv.h"
 #include "../std_types.h"
 #include "../std_libraries.h"
+#include "../GPIO/GPIO.h"
 
 /* ----------------------------------------------- macros objects ------------------------- */
 

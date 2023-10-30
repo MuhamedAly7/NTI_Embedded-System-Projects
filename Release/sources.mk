@@ -26,6 +26,8 @@ ECU_Layer/SevenSegment \
 ECU_Layer/lcd \
 MCAL_Layer/ADC \
 MCAL_Layer/GPIO \
+MCAL_Layer/SPI \
+MCAL_Layer/UART \
 MCAL_Layer/interrupt \
 MCAL_Layer/timer0 \
 MCAL_Layer/timer1 \

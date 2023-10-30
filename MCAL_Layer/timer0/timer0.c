@@ -46,6 +46,7 @@ Error_Status_t Timer0_start(const timer0_t *timer0_obj)
 		else
 		{
 			TIMER0_CONTROL->TCCR0_CFG.CS0_BITS = timer0_obj->prescaler_select;
+			DIO_voidSetPinDirection(PORTB_INDEX, PIN3_INDEX, GPIO_DIRECTION_OUTPUT);
 			TIMER0_CONTROL->OCR0_CFG = 0;
 		}
 

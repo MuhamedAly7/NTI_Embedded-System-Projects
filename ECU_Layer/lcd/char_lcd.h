@@ -48,7 +48,7 @@ void H_LCD_void_SendCommand(u8 Copy_u8Command);
 void H_LCD_void_SendData(u8 Copy_u8Data);
 void H_LCD_void_SendString(u8 *Copy_u8Str);
 void H_LCD_void_gotoXY(u8 copy_u8Row,u8 copy_u8Col);
-void H_LCD_void_sendIntNum(s32 copy_s32Num);
+void H_LCD_void_sendIntNum(u32 copy_s32Num);
 void H_LCD_void_creatCustomChar(const u8 * ArrPattern,u8 copy_u8charCode);
 void H_LCD_void_displayCustomChar(u8 copy_u8charCode);
 void H_LCD_void_Clear_Display(void);

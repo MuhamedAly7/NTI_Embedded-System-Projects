@@ -145,7 +145,7 @@ void H_LCD_void_gotoXY(u8 copy_u8Row,u8 copy_u8Col)
 		break;
 	}
 }
-void H_LCD_void_sendIntNum(s32 copy_s32Num)
+void H_LCD_void_sendIntNum(u32 copy_s32Num)
 {
 	u8 num_of_digits = countDigits(copy_s32Num);
 	u8 temp_str[num_of_digits + 1];
