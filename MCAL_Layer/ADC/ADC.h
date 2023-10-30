@@ -10,7 +10,7 @@
 
 /* --------------------------- Includes Start ------------------------- */
 #include "ADC_cfg.h"
-#include "../../PRIV/Atmega32.h"
+#include "ADC_Priv.h"
 #include "../std_types.h"
 #include "../std_libraries.h"
 #include "../GPIO/GPIO.h"

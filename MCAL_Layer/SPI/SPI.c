@@ -8,10 +8,10 @@
 
 #include "SPI.h"
 
-//u8 dum = 0;
+u8 dum = 0;
 
 // SPI callback
-void (*spi_callbackfun)() = NULL;
+void (*spi_callbackfun)(void) = NULL;
 
 Error_Status_t SPI_Init(const SPI_T *spi_obj)
 {
@@ -65,6 +65,7 @@ Error_Status_t SPI_AsynchCallBack(void (*spi_callback)(void), u8 ch)
 		SPI_MAP->SPCR_CFG |= (0x01<<7);
 		spi_callbackfun = spi_callback;
 		SPI_MAP->SPDR_CFG = ch;
+		while(!(SPI_MAP->SPSR_CFG & (0x01<<7)));
 	}
 	return ret_status;
 }
@@ -96,7 +97,7 @@ void SPI_VECTOR(void)
 	// Clear flag
 
 	// execute ISR if it existed
-	//dum = SPI_MAP->SPDR_CFG;
+	dum = SPI_MAP->SPDR_CFG;
 //	CLEAR_BIT(SPI_MAP->SPCR_CFG, 7);
 
 	if(spi_callbackfun)

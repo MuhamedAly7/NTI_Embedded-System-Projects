@@ -177,7 +177,7 @@ LOAD c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a
 .rela.plt
  *(.rela.plt)
 
-.text           0x00000000     0x398c
+.text           0x00000000     0x3c52
  *(.vectors)
  .vectors       0x00000000       0x54 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib/avr5/crtm32.o
                 0x00000000                __vectors
@@ -433,130 +433,130 @@ LOAD c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a
                 0x00001ca4       0x50 ./MCAL_Layer/SPI/SPI.o
                 0x00001ca4                SPI_Transfere
  .text.SPI_AsynchCallBack
-                0x00001cf4       0x5e ./MCAL_Layer/SPI/SPI.o
+                0x00001cf4       0x68 ./MCAL_Layer/SPI/SPI.o
                 0x00001cf4                SPI_AsynchCallBack
  .text.SPI_Send_String
-                0x00001d52       0x58 ./MCAL_Layer/SPI/SPI.o
-                0x00001d52                SPI_Send_String
+                0x00001d5c       0x58 ./MCAL_Layer/SPI/SPI.o
+                0x00001d5c                SPI_Send_String
  .text.__vector_12
-                0x00001daa       0x66 ./MCAL_Layer/SPI/SPI.o
-                0x00001daa                __vector_12
+                0x00001db4       0x70 ./MCAL_Layer/SPI/SPI.o
+                0x00001db4                __vector_12
  .text.DIO_voidSetPinDirection
-                0x00001e10       0xee ./MCAL_Layer/GPIO/GPIO.o
-                0x00001e10                DIO_voidSetPinDirection
+                0x00001e24       0xee ./MCAL_Layer/GPIO/GPIO.o
+                0x00001e24                DIO_voidSetPinDirection
  .text.DIO_voidSetPinValue
-                0x00001efe       0xee ./MCAL_Layer/GPIO/GPIO.o
-                0x00001efe                DIO_voidSetPinValue
+                0x00001f12       0xee ./MCAL_Layer/GPIO/GPIO.o
+                0x00001f12                DIO_voidSetPinValue
  .text.DIO_u8GetPinValue
-                0x00001fec       0x60 ./MCAL_Layer/GPIO/GPIO.o
-                0x00001fec                DIO_u8GetPinValue
+                0x00002000       0x60 ./MCAL_Layer/GPIO/GPIO.o
+                0x00002000                DIO_u8GetPinValue
  .text.DIO_voidSetPortDirection
-                0x0000204c       0x38 ./MCAL_Layer/GPIO/GPIO.o
-                0x0000204c                DIO_voidSetPortDirection
+                0x00002060       0x38 ./MCAL_Layer/GPIO/GPIO.o
+                0x00002060                DIO_voidSetPortDirection
  .text.DIO_voidSetPortValues
-                0x00002084       0x38 ./MCAL_Layer/GPIO/GPIO.o
-                0x00002084                DIO_voidSetPortValues
+                0x00002098       0x38 ./MCAL_Layer/GPIO/GPIO.o
+                0x00002098                DIO_voidSetPortValues
  .text.DIO_u8GetPortValues
-                0x000020bc       0x3a ./MCAL_Layer/GPIO/GPIO.o
-                0x000020bc                DIO_u8GetPortValues
+                0x000020d0       0x3a ./MCAL_Layer/GPIO/GPIO.o
+                0x000020d0                DIO_u8GetPortValues
  .text.ADC_voidInit
-                0x000020f6       0xbe ./MCAL_Layer/ADC/ADC.o
-                0x000020f6                ADC_voidInit
+                0x0000210a       0xbe ./MCAL_Layer/ADC/ADC.o
+                0x0000210a                ADC_voidInit
  .text.ADC_getDigitalValueSynchNonBlocking
-                0x000021b4       0x32 ./MCAL_Layer/ADC/ADC.o
-                0x000021b4                ADC_getDigitalValueSynchNonBlocking
+                0x000021c8       0x32 ./MCAL_Layer/ADC/ADC.o
+                0x000021c8                ADC_getDigitalValueSynchNonBlocking
  .text.H_LCD_void_Init
-                0x000021e6      0x344 ./ECU_Layer/lcd/char_lcd.o
-                0x000021e6                H_LCD_void_Init
+                0x000021fa      0x344 ./ECU_Layer/lcd/char_lcd.o
+                0x000021fa                H_LCD_void_Init
  .text.H_LCD_void_SendCommand
-                0x0000252a      0x2c4 ./ECU_Layer/lcd/char_lcd.o
-                0x0000252a                H_LCD_void_SendCommand
+                0x0000253e      0x2c4 ./ECU_Layer/lcd/char_lcd.o
+                0x0000253e                H_LCD_void_SendCommand
  .text.H_LCD_void_SendData
-                0x000027ee      0x2c4 ./ECU_Layer/lcd/char_lcd.o
-                0x000027ee                H_LCD_void_SendData
+                0x00002802      0x2c4 ./ECU_Layer/lcd/char_lcd.o
+                0x00002802                H_LCD_void_SendData
  .text.H_LCD_void_SendString
-                0x00002ab2       0x42 ./ECU_Layer/lcd/char_lcd.o
-                0x00002ab2                H_LCD_void_SendString
+                0x00002ac6       0x42 ./ECU_Layer/lcd/char_lcd.o
+                0x00002ac6                H_LCD_void_SendString
  .text.H_LCD_void_gotoXY
-                0x00002af4       0x8a ./ECU_Layer/lcd/char_lcd.o
-                0x00002af4                H_LCD_void_gotoXY
+                0x00002b08       0x8a ./ECU_Layer/lcd/char_lcd.o
+                0x00002b08                H_LCD_void_gotoXY
  .text.H_LCD_void_sendIntNum
-                0x00002b7e       0xfe ./ECU_Layer/lcd/char_lcd.o
-                0x00002b7e                H_LCD_void_sendIntNum
+                0x00002b92       0xfe ./ECU_Layer/lcd/char_lcd.o
+                0x00002b92                H_LCD_void_sendIntNum
  .text.H_LCD_void_Clear_Display
-                0x00002c7c       0x14 ./ECU_Layer/lcd/char_lcd.o
-                0x00002c7c                H_LCD_void_Clear_Display
+                0x00002c90       0x14 ./ECU_Layer/lcd/char_lcd.o
+                0x00002c90                H_LCD_void_Clear_Display
  .text.H_LCD_void_creatCustomChar
-                0x00002c90       0x56 ./ECU_Layer/lcd/char_lcd.o
-                0x00002c90                H_LCD_void_creatCustomChar
+                0x00002ca4       0x56 ./ECU_Layer/lcd/char_lcd.o
+                0x00002ca4                H_LCD_void_creatCustomChar
  .text.H_LCD_void_displayCustomChar
-                0x00002ce6       0x1a ./ECU_Layer/lcd/char_lcd.o
-                0x00002ce6                H_LCD_void_displayCustomChar
+                0x00002cfa       0x1a ./ECU_Layer/lcd/char_lcd.o
+                0x00002cfa                H_LCD_void_displayCustomChar
  .text.countDigits
-                0x00002d00       0x6e ./ECU_Layer/lcd/char_lcd.o
-                0x00002d00                countDigits
+                0x00002d14       0x6e ./ECU_Layer/lcd/char_lcd.o
+                0x00002d14                countDigits
  .text.SevenSeG_voidinit
-                0x00002d6e       0x36 ./ECU_Layer/SevenSegment/seven_segment.o
-                0x00002d6e                SevenSeG_voidinit
+                0x00002d82       0x36 ./ECU_Layer/SevenSegment/seven_segment.o
+                0x00002d82                SevenSeG_voidinit
  .text.SevenSeG_voidWriteNum
-                0x00002da4       0x60 ./ECU_Layer/SevenSegment/seven_segment.o
-                0x00002da4                SevenSeG_voidWriteNum
+                0x00002db8       0x60 ./ECU_Layer/SevenSegment/seven_segment.o
+                0x00002db8                SevenSeG_voidWriteNum
  .text.H_KEYPAD_void_Init
-                0x00002e04       0x5e ./ECU_Layer/Keypad/keypad.o
-                0x00002e04                H_KEYPAD_void_Init
+                0x00002e18       0x5e ./ECU_Layer/Keypad/keypad.o
+                0x00002e18                H_KEYPAD_void_Init
  .text.H_KEYPAD_u8_getPressedKey
-                0x00002e62      0x1ea ./ECU_Layer/Keypad/keypad.o
-                0x00002e62                H_KEYPAD_u8_getPressedKey
+                0x00002e76      0x1ea ./ECU_Layer/Keypad/keypad.o
+                0x00002e76                H_KEYPAD_u8_getPressedKey
  .text.keypad_cursor_init
-                0x0000304c       0x4e ./ECU_Layer/Keypad/keypad.o
-                0x0000304c                keypad_cursor_init
+                0x00003060       0x4e ./ECU_Layer/Keypad/keypad.o
+                0x00003060                keypad_cursor_init
  .text.H_KEYPAD_u8_WriteOnDigits
-                0x0000309a      0x236 ./ECU_Layer/Keypad/keypad.o
-                0x0000309a                H_KEYPAD_u8_WriteOnDigits
- .text.Spi_Isr  0x000032d0       0x36 ./main.o
-                0x000032d0                Spi_Isr
- .text.main     0x00003306       0x5e ./main.o
-                0x00003306                main
- .text.libgcc   0x00003364       0x18 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_udivmodqi4.o)
-                0x00003364                __udivmodqi4
- .text.libgcc   0x0000337c       0x26 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_divmodhi4.o)
-                0x0000337c                __divmodhi4
-                0x0000337c                _div
- .text.libgcc   0x000033a2        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_exit.o)
- .text.libgcc   0x000033a2        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_copy_data.o)
- .text.libgcc   0x000033a2        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_clear_bss.o)
- .text.libgcc   0x000033a2       0x28 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_udivmodhi4.o)
-                0x000033a2                __udivmodhi4
- .text.libgcc   0x000033ca       0x38 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_prologue.o)
-                0x000033ca                __prologue_saves__
- .text.libgcc   0x00003402       0x36 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_epilogue.o)
-                0x00003402                __epilogue_restores__
+                0x000030ae      0x236 ./ECU_Layer/Keypad/keypad.o
+                0x000030ae                H_KEYPAD_u8_WriteOnDigits
+ .text.Spi_Isr  0x000032e4       0x2c ./main.o
+                0x000032e4                Spi_Isr
+ .text.main     0x00003310      0x31a ./main.o
+                0x00003310                main
+ .text.libgcc   0x0000362a       0x18 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_udivmodqi4.o)
+                0x0000362a                __udivmodqi4
+ .text.libgcc   0x00003642       0x26 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_divmodhi4.o)
+                0x00003642                __divmodhi4
+                0x00003642                _div
+ .text.libgcc   0x00003668        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_exit.o)
+ .text.libgcc   0x00003668        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_copy_data.o)
+ .text.libgcc   0x00003668        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_clear_bss.o)
+ .text.libgcc   0x00003668       0x28 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_udivmodhi4.o)
+                0x00003668                __udivmodhi4
+ .text.libgcc   0x00003690       0x38 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_prologue.o)
+                0x00003690                __prologue_saves__
+ .text.libgcc   0x000036c8       0x36 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_epilogue.o)
+                0x000036c8                __epilogue_restores__
  .text.avr-libc
-                0x00003438        0xe c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib/avr5\libc.a(memset.o)
-                0x00003438                memset
+                0x000036fe        0xe c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib/avr5\libc.a(memset.o)
+                0x000036fe                memset
  .text.avr-libc
-                0x00003446       0x48 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib/avr5\libc.a(sprintf.o)
-                0x00003446                sprintf
+                0x0000370c       0x48 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib/avr5\libc.a(sprintf.o)
+                0x0000370c                sprintf
  .text.avr-libc
-                0x0000348e      0x3ba c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib/avr5\libc.a(vfprintf_std.o)
-                0x0000348e                vfprintf
+                0x00003754      0x3ba c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib/avr5\libc.a(vfprintf_std.o)
+                0x00003754                vfprintf
  .text.avr-libc
-                0x00003848       0x16 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib/avr5\libc.a(strnlen_P.o)
-                0x00003848                strnlen_P
+                0x00003b0e       0x16 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib/avr5\libc.a(strnlen_P.o)
+                0x00003b0e                strnlen_P
  .text.avr-libc
-                0x0000385e       0x16 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib/avr5\libc.a(strnlen.o)
-                0x0000385e                strnlen
+                0x00003b24       0x16 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib/avr5\libc.a(strnlen.o)
+                0x00003b24                strnlen
  .text.avr-libc
-                0x00003874       0x58 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib/avr5\libc.a(fputc.o)
-                0x00003874                fputc
+                0x00003b3a       0x58 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib/avr5\libc.a(fputc.o)
+                0x00003b3a                fputc
  .text.avr-libc
-                0x000038cc       0xbc c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib/avr5\libc.a(ultoa_invert.o)
-                0x000038cc                __ultoa_invert
-                0x00003988                . = ALIGN (0x2)
+                0x00003b92       0xbc c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib/avr5\libc.a(ultoa_invert.o)
+                0x00003b92                __ultoa_invert
+                0x00003c4e                . = ALIGN (0x2)
  *(.fini9)
- .fini9         0x00003988        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_exit.o)
-                0x00003988                exit
-                0x00003988                _exit
+ .fini9         0x00003c4e        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_exit.o)
+                0x00003c4e                exit
+                0x00003c4e                _exit
  *(.fini9)
  *(.fini8)
  *(.fini8)
@@ -575,11 +575,11 @@ LOAD c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a
  *(.fini1)
  *(.fini1)
  *(.fini0)
- .fini0         0x00003988        0x4 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_exit.o)
+ .fini0         0x00003c4e        0x4 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a(_exit.o)
  *(.fini0)
-                0x0000398c                _etext = .
+                0x00003c52                _etext = .
 
-.data           0x00800060       0x4a load address 0x0000398c
+.data           0x00800060       0x4a load address 0x00003c52
                 0x00800060                PROVIDE (__data_start, .)
  *(.data)
  .data          0x00800060        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib/avr5/crtm32.o
@@ -647,7 +647,7 @@ LOAD c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a
                 0x008000aa                _edata = .
                 0x008000aa                PROVIDE (__data_end, .)
 
-.bss            0x008000aa       0x1e
+.bss            0x008000aa       0x1f
                 0x008000aa                PROVIDE (__bss_start, .)
  *(.bss)
  .bss           0x008000aa        0x0 c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/../../../../avr/lib/avr5/crtm32.o
@@ -713,29 +713,31 @@ LOAD c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a
                 0x008000b8                INT1_ISR
  .bss.INT2_ISR  0x008000ba        0x2 ./MCAL_Layer/interrupt/ext_interrupt.o
                 0x008000ba                INT2_ISR
+ .bss.dum       0x008000bc        0x1 ./MCAL_Layer/SPI/SPI.o
+                0x008000bc                dum
  .bss.spi_callbackfun
-                0x008000bc        0x2 ./MCAL_Layer/SPI/SPI.o
-                0x008000bc                spi_callbackfun
- .bss.dum       0x008000be        0x1 ./main.o
-                0x008000be                dum
+                0x008000bd        0x2 ./MCAL_Layer/SPI/SPI.o
+                0x008000bd                spi_callbackfun
+ .bss.dum1      0x008000bf        0x1 ./main.o
+                0x008000bf                dum1
  .bss.ret_status
-                0x008000bf        0x1 ./main.o
-                0x008000bf                ret_status
- .bss.my_spi    0x008000c0        0x7 ./main.o
-                0x008000c0                my_spi
+                0x008000c0        0x1 ./main.o
+                0x008000c0                ret_status
+ .bss.my_spi    0x008000c1        0x7 ./main.o
+                0x008000c1                my_spi
  *(COMMON)
- COMMON         0x008000c7        0x1 ./main.o
-                0x008000c7                dummy_spi
-                0x008000c8                PROVIDE (__bss_end, .)
-                0x0000398c                __data_load_start = LOADADDR (.data)
-                0x000039d6                __data_load_end = (__data_load_start + SIZEOF (.data))
+ COMMON         0x008000c8        0x1 ./main.o
+                0x008000c8                dummy_spi
+                0x008000c9                PROVIDE (__bss_end, .)
+                0x00003c52                __data_load_start = LOADADDR (.data)
+                0x00003c9c                __data_load_end = (__data_load_start + SIZEOF (.data))
 
-.noinit         0x008000c8        0x0
-                0x008000c8                PROVIDE (__noinit_start, .)
+.noinit         0x008000c9        0x0
+                0x008000c9                PROVIDE (__noinit_start, .)
  *(.noinit*)
-                0x008000c8                PROVIDE (__noinit_end, .)
-                0x008000c8                _end = .
-                0x008000c8                PROVIDE (__heap_start, .)
+                0x008000c9                PROVIDE (__noinit_end, .)
+                0x008000c9                _end = .
+                0x008000c9                PROVIDE (__heap_start, .)
 
 .eeprom         0x00810000        0x0
  *(.eeprom*)
@@ -753,33 +755,33 @@ LOAD c:/winavr-20100110/bin/../lib/gcc/avr/4.3.3/avr5\libgcc.a
 .signature
  *(.signature*)
 
-.stab           0x00000000     0x5124
+.stab           0x00000000     0x51fc
  *(.stab)
- .stab          0x00000000     0x10a4 ./MCAL_Layer/timer1/timer1.o
- .stab          0x000010a4      0x9f0 ./MCAL_Layer/timer0/timer0.o
-                                0xc18 (size before relaxing)
- .stab          0x00001a94      0x5e8 ./MCAL_Layer/interrupt/ext_interrupt.o
+ .stab          0x00000000     0x1074 ./MCAL_Layer/timer1/timer1.o
+ .stab          0x00001074      0x9c0 ./MCAL_Layer/timer0/timer0.o
+                                0xbe8 (size before relaxing)
+ .stab          0x00001a34      0x5e8 ./MCAL_Layer/interrupt/ext_interrupt.o
                                 0x810 (size before relaxing)
- .stab          0x0000207c      0x498 ./MCAL_Layer/UART/UART.o
+ .stab          0x0000201c      0x498 ./MCAL_Layer/UART/UART.o
                                 0x6c0 (size before relaxing)
- .stab          0x00002514      0x654 ./MCAL_Layer/SPI/SPI.o
-                                0x87c (size before relaxing)
- .stab          0x00002b68      0x540 ./MCAL_Layer/GPIO/GPIO.o
-                                0x768 (size before relaxing)
- .stab          0x000030a8      0x384 ./MCAL_Layer/ADC/ADC.o
-                                0x5ac (size before relaxing)
- .stab          0x0000342c      0xd5c ./ECU_Layer/lcd/char_lcd.o
-                                0xf84 (size before relaxing)
- .stab          0x00004188      0x36c ./ECU_Layer/SevenSegment/seven_segment.o
-                                0x594 (size before relaxing)
- .stab          0x000044f4      0x7f8 ./ECU_Layer/Keypad/keypad.o
+ .stab          0x000024b4      0x648 ./MCAL_Layer/SPI/SPI.o
+                                0x870 (size before relaxing)
+ .stab          0x00002afc      0x510 ./MCAL_Layer/GPIO/GPIO.o
+                                0x738 (size before relaxing)
+ .stab          0x0000300c      0x39c ./MCAL_Layer/ADC/ADC.o
+                                0x5c4 (size before relaxing)
+ .stab          0x000033a8      0xd2c ./ECU_Layer/lcd/char_lcd.o
+                                0xf54 (size before relaxing)
+ .stab          0x000040d4      0x33c ./ECU_Layer/SevenSegment/seven_segment.o
+                                0x564 (size before relaxing)
+ .stab          0x00004410      0x7c8 ./ECU_Layer/Keypad/keypad.o
+                                0x9f0 (size before relaxing)
+ .stab          0x00004bd8      0x624 ./main.o
                                 0xa20 (size before relaxing)
- .stab          0x00004cec      0x438 ./main.o
-                                0x840 (size before relaxing)
 
-.stabstr        0x00000000     0x4d0f
+.stabstr        0x00000000     0x42c6
  *(.stabstr)
- .stabstr       0x00000000     0x4d0f ./MCAL_Layer/timer1/timer1.o
+ .stabstr       0x00000000     0x42c6 ./MCAL_Layer/timer1/timer1.o
 
 .stab.excl
  *(.stab.excl)

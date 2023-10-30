@@ -1,11 +1,10 @@
 main.o main.o: ../main.c ../main.h ../MCAL_Layer/GPIO/GPIO.h \
   ../MCAL_Layer/GPIO/./../std_types.h \
-  ../MCAL_Layer/GPIO/./../std_libraries.h \
-  ../MCAL_Layer/GPIO/../../PRIV/Atmega32.h \
-  ../MCAL_Layer/GPIO/../../PRIV/../MCAL_Layer/std_types.h \
-  ../MCAL_Layer/GPIO/GPIO_cfg.h ../MCAL_Layer/GPIO/../../math.h \
-  ../MCAL_Layer/timer0/timer0.h ../MCAL_Layer/timer0/timer0_cfg.h \
-  ../MCAL_Layer/timer0/timer0_priv.h ../MCAL_Layer/timer0/../std_types.h \
+  ../MCAL_Layer/GPIO/./../std_libraries.h ../MCAL_Layer/GPIO/GPIO_Priv.h \
+  ../MCAL_Layer/GPIO/../std_types.h ../MCAL_Layer/GPIO/GPIO_cfg.h \
+  ../MCAL_Layer/GPIO/../../math.h ../MCAL_Layer/timer0/timer0.h \
+  ../MCAL_Layer/timer0/timer0_cfg.h ../MCAL_Layer/timer0/timer0_priv.h \
+  ../MCAL_Layer/timer0/../std_types.h \
   ../MCAL_Layer/timer0/../interrupt/GIE_interrupt.h \
   ../MCAL_Layer/timer0/../interrupt/GIE_interrupt_priv.h \
   ../MCAL_Layer/timer0/../interrupt/../std_types.h \
@@ -46,9 +45,9 @@ main.o main.o: ../main.c ../main.h ../MCAL_Layer/GPIO/GPIO.h \
 
 ../MCAL_Layer/GPIO/./../std_libraries.h:
 
-../MCAL_Layer/GPIO/../../PRIV/Atmega32.h:
+../MCAL_Layer/GPIO/GPIO_Priv.h:
 
-../MCAL_Layer/GPIO/../../PRIV/../MCAL_Layer/std_types.h:
+../MCAL_Layer/GPIO/../std_types.h:
 
 ../MCAL_Layer/GPIO/GPIO_cfg.h:
 
