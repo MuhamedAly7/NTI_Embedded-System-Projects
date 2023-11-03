@@ -41,7 +41,7 @@ void RTC_SetTime(const RTC_TIME_T *init_time)
 	ret_status = I2C_SendByte(DS1307_ADDRESS_WRITE);
 
 	// Send address that wanted to access
-	ret_status = I2C_SendByte(0x00);
+	ret_status = I2C_SendByte(DS1307_BASE_ADDRESS_OF_TIME);
 
 	// send second
 	ret_status = I2C_SendByte(sec_bcd);
@@ -80,7 +80,7 @@ void RTC_SetTime(const RTC_TIME_T *init_time)
 	ret_status = I2C_SendByte(DS1307_ADDRESS_WRITE);
 
 	// Send address that wanted to access
-	ret_status = I2C_SendByte(0x00);
+	ret_status = I2C_SendByte(DS1307_BASE_ADDRESS_OF_TIME);
 
 	// send second
 	ret_status = I2C_SendByte(sec_bcd);
@@ -109,7 +109,7 @@ void RTC_GetTime(RTC_TIME_T *time)
 	// send address
 	ret_status = I2C_SendByte(DS1307_ADDRESS_WRITE);
 	// Send address that wanted to access
-	ret_status = I2C_SendByte(0x00);
+	ret_status = I2C_SendByte(DS1307_BASE_ADDRESS_OF_TIME);
 	// Send start
 	ret_status = I2C_SendStart();
 	// send address
@@ -134,7 +134,7 @@ void RTC_GetTime(RTC_TIME_T *time)
 	// send address
 	ret_status = I2C_SendByte(DS1307_ADDRESS_WRITE);
 	// Send address that wanted to access
-	ret_status = I2C_SendByte(0x00);
+	ret_status = I2C_SendByte(DS1307_BASE_ADDRESS_OF_TIME);
 	// Send start
 	ret_status = I2C_SendStart();
 	// send address
@@ -181,7 +181,7 @@ void RTC_SetDate(const RTC_DATE_T *init_date)
 	// send address
 	ret_status = I2C_SendByte(DS1307_ADDRESS_WRITE);
 	// Send address that wanted to access
-	ret_status = I2C_SendByte(0x04);
+	ret_status = I2C_SendByte(DS1307_BASE_ADDRESS_OF_DATE);
 	// send day
 	ret_status = I2C_SendByte(day_bcd);
 
@@ -205,7 +205,7 @@ void RTC_GetDate(RTC_DATE_T *date)
 	// send address
 	ret_status = I2C_SendByte(DS1307_ADDRESS_WRITE);
 	// Send address that wanted to access
-	ret_status = I2C_SendByte(0x04);
+	ret_status = I2C_SendByte(DS1307_BASE_ADDRESS_OF_DATE);
 	// Send start
 	ret_status = I2C_SendStart();
 	// send address

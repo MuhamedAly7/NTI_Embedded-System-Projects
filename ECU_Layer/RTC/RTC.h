@@ -16,7 +16,8 @@
 /* --------------------------------------------------- Macros objects ----------------------------- */
 #define DS1307_ADDRESS_WRITE 0xD0
 #define DS1307_ADDRESS_READ  0xD1
-
+#define DS1307_BASE_ADDRESS_OF_TIME  0x00
+#define DS1307_BASE_ADDRESS_OF_DATE  0x04
 
 /* --------------------------------------------------- User data types ---------------------------- */
 
