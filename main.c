@@ -11,10 +11,10 @@ Error_Status_t ret_status = NO_ERROR;
 
 u8 rec_data;
 
-RTC_TIME_T my_time = {.hour = 22,
-		.min = 28,
-		.sec = 0,
-		.ampm = 0};
+RTC_TIME_T my_time = {.hour = 11,
+		.min = 59,
+		.sec = 30,
+		.ampm = PM};
 
 RTC_DATE_T my_date = {.year = 23,
 		.month = 11,
@@ -43,8 +43,8 @@ int main()
 		RTC_GetDate(&rec_date);
 		_delay_ms(20);
 
-		sprintf(buffer1, "%02d:%02d:%02d", rec_time.hour, rec_time.min, rec_time.sec);
-		sprintf(buffer2, "%02d:%02d:%02d", rec_date.month, rec_date.day, rec_date.year);
+		sprintf(buffer1, "%02d:%02d:%02d %s", rec_time.hour, rec_time.min, rec_time.sec, ((rec_time.ampm == 0) ? "AM" : "PM"));
+		sprintf(buffer2, "%02d/%02d/%02d", rec_date.month, rec_date.day, rec_date.year);
 		H_LCD_void_gotoXY(2, 1);
 		H_LCD_void_SendString("Time : ");
 		H_LCD_void_SendString(buffer1);

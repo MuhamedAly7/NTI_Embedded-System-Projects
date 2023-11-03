@@ -12,6 +12,8 @@
 #include "../../MCAL_Layer/I2C/I2C.h"
 
 
+
+/* --------------------------------------------------- Macros objects ----------------------------- */
 #define DS1307_ADDRESS_WRITE 0xD0
 #define DS1307_ADDRESS_READ  0xD1
 

@@ -25,7 +25,11 @@ void RTC_Init(u8 req_speed)
 
 void RTC_SetTime(const RTC_TIME_T *init_time)
 {
+#if RTC_TIME_SYSTEM == RTC_24HR_SYSTEM
+
 	Error_Status_t ret_status = NO_ERROR;
+
+	// Convert hours, minutes, and seconds to BCD format
 	u8 sec_bcd = decimal_to_BCD(init_time->sec);
 	u8 min_bcd = decimal_to_BCD(init_time->min);
 	u8 hour_bcd = decimal_to_BCD(init_time->hour);
@@ -50,11 +54,55 @@ void RTC_SetTime(const RTC_TIME_T *init_time)
 
 	// send stop
 	ret_status = I2C_SendStop();
+#elif RTC_TIME_SYSTEM == RTC_12HR_SYSTEM
+
+	Error_Status_t ret_status = NO_ERROR;
+
+	// Convert hours, minutes, and seconds to BCD format
+	u8 sec_bcd = decimal_to_BCD(init_time->sec);
+	u8 min_bcd = decimal_to_BCD(init_time->min);
+	u8 hour_bcd;
+
+	if((init_time->ampm == PM) && (init_time->hour < 12))
+	{
+		hour_bcd = decimal_to_BCD((init_time->hour + 12));
+	}
+	else
+	{
+		hour_bcd = decimal_to_BCD(init_time->hour);
+	}
+
+
+	// Send start
+	ret_status = I2C_SendStart();
+
+	// send address
+	ret_status = I2C_SendByte(DS1307_ADDRESS_WRITE);
+
+	// Send address that wanted to access
+	ret_status = I2C_SendByte(0x00);
+
+	// send second
+	ret_status = I2C_SendByte(sec_bcd);
+
+	// send min
+	ret_status = I2C_SendByte(min_bcd);
+
+	// send hour
+	ret_status = I2C_SendByte(hour_bcd);
+
+	// send stop
+	ret_status = I2C_SendStop();
+
+#endif
 }
+
 
 
 void RTC_GetTime(RTC_TIME_T *time)
 {
+#if RTC_TIME_SYSTEM == RTC_24HR_SYSTEM
+
 	Error_Status_t ret_status = NO_ERROR;
 	// Send start
 	ret_status = I2C_SendStart();
@@ -77,7 +125,48 @@ void RTC_GetTime(RTC_TIME_T *time)
 	time->sec = BCD_to_decimal(time->sec);
 	time->min = BCD_to_decimal(time->min);
 	time->hour = BCD_to_decimal(time->hour);
+
+#elif RTC_TIME_SYSTEM == RTC_12HR_SYSTEM
+
+	Error_Status_t ret_status = NO_ERROR;
+	// Send start
+	ret_status = I2C_SendStart();
+	// send address
+	ret_status = I2C_SendByte(DS1307_ADDRESS_WRITE);
+	// Send address that wanted to access
+	ret_status = I2C_SendByte(0x00);
+	// Send start
+	ret_status = I2C_SendStart();
+	// send address
+	ret_status = I2C_SendByte(DS1307_ADDRESS_READ);
+
+	// receive time
+	ret_status = I2C_ReceiveByte_ACK(&(time->sec));
+	ret_status = I2C_ReceiveByte_ACK(&(time->min));
+	ret_status = I2C_ReceiveByte_NoACK(&(time->hour));
+
+	// Determine AM/PM based on hours
+	time->ampm = (time->hour >= 12) ? PM : AM;
+
+	// send stop
+	ret_status = I2C_SendStop();
+
+	time->sec = BCD_to_decimal(time->sec);
+	time->min = BCD_to_decimal(time->min);
+	time->hour = BCD_to_decimal(time->hour);
+
+	// Adjust hours for 12-hour format
+	if (time->hour > 12) {
+		time->hour -= 12;
+	}
+	else if (time->hour == 0) {
+		time->hour= 12;
+	}
+
+#endif
 }
+
+
 
 
 void RTC_SetDate(const RTC_DATE_T *init_date)
