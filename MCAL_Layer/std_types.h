@@ -8,12 +8,13 @@
 #ifndef MCAL_LAYER_STD_TYPES_H_
 #define MCAL_LAYER_STD_TYPES_H_
 
-typedef unsigned char  u8;
-typedef signed char    s8;
-typedef unsigned short u16;
-typedef signed char    s16;
-typedef unsigned int   u32;
-typedef signed int     s32;
+typedef unsigned char       u8;
+typedef signed char         s8;
+typedef unsigned short      u16;
+typedef signed short        s16;
+typedef unsigned long int   u32;
+typedef signed long int     s32;
+
 
 /* To return the program status */
 typedef enum {

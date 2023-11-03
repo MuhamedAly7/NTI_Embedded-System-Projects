@@ -8,14 +8,16 @@
 #ifndef MCAL_LAYER_UART_UART_H_
 #define MCAL_LAYER_UART_UART_H_
 
+/* ---------------------------------------------- Includes ------------------------------ */
 #include "UART_Priv.h"
 #include "UART_cfg.h"
 #include <util/delay.h>
 #include "../../math.h"
 #include  "../std_libraries.h"
 
-#define F_CPU   8000000UL
 
+
+/* ---------------------------------------------- APIs ---------------------------------- */
 Error_Status_t UART_Init(void);
 Error_Status_t UART_SendByte(u8 ch);
 Error_Status_t UART_ReceiveByte(u8 *RecByte);

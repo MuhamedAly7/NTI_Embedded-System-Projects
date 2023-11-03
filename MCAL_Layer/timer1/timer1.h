@@ -103,11 +103,12 @@ typedef struct{
 	u8 icu_trigger        : 1;
 }timer1_t;
 
+
 /* ------------------------------------------------ APIs ---------------------------------- */
 Error_Status_t Timer1_Init(const timer1_t *timer1_obj);
 Error_Status_t Timer1_start(const timer1_t *timer1_obj);
 Error_Status_t Timer1_stop(const timer1_t *timer1_obj);
-Error_Status_t Timer1_GetCounts(const timer1_t *timer1_obj, u16 *Num_of_count);
+Error_Status_t Timer1_GetCounts(u16 *Num_of_count);
 Error_Status_t Timer1_setDelayTimeMilliSec(const timer1_t *timer1_obj, u8 Time_ms);
 Error_Status_t Timer1_OVF_IntEnable(void);
 Error_Status_t Timer1_OCA_IntEnable(void);

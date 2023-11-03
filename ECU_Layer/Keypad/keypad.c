@@ -8,18 +8,26 @@
 #include "keypad.h"
 
 static const u8 btn_values[KEYPAD_ROWS][KEYPAD_COLUMNS] = {
-                                                            {1, 2, 3, 4},
-                                                            {5, 6, 7, 8},
-                                                            {9, 10, 11, 12},
-                                                            {13, 14, 15, 16},
-                                                             };
+		{1, 2, 3, 4},
+		{5, 6, 7, 8},
+		{9, 10, 11, 12},
+		{13, 14, 15, 16},
+};
 
 static const u8 btn_values2[KEYPAD_ROWS][KEYPAD_COLUMNS] = {
-                                                            {'1', '2', '3', '4'},
-                                                            {'5', '6', '7', '8'},
-                                                            {'9', '0', '#', 'a'},
-                                                            {'b', 'c', 'd', 'e'},
-                                                             };
+		{'1', '2', '3', '4'},
+		{'5', '6', '7', '8'},
+		{'9', '0', '-', 'a'},
+		{'b', 'c', 'd', 'e'},
+};
+
+// this in case we write a password
+static const u8 btn_values2_pass[KEYPAD_ROWS][KEYPAD_COLUMNS] = {
+		{'*', '*', '*', '*'},
+		{'*', '*', '*', '*'},
+		{'*', '*', '-', '*'},
+		{'*', '*', '*', '*'},
+};
 
 static u8 rows_pins[4] = {KEYPAD_R1_PIN, KEYPAD_R2_PIN, KEYPAD_R3_PIN, KEYPAD_R4_PIN};
 static u8 cols_pins[4] = {KEYPAD_C1_PIN, KEYPAD_C2_PIN, KEYPAD_C3_PIN, KEYPAD_C4_PIN};
@@ -88,6 +96,7 @@ void keypad_cursor_init(keypad_digit_t *digits_obj)
 		for(l_cursor = 0; l_cursor < 5; l_cursor++)
 		{
 			digits_obj->digits[l_cursor] = 0;
+			digits_obj->pass_digits[l_cursor] = 0;
 		}
 	}
 }
@@ -109,7 +118,7 @@ void H_KEYPAD_u8_WriteOnDigits(keypad_digit_t *digits_obj)
 
 		DIO_voidSetPinValue(rows_ports[l_row_counter], rows_pins[l_row_counter], GPIO_LOW);
 
-		_delay_ms(10);
+		_delay_ms(20);
 
 		for(l_column_counter = 0; l_column_counter < KEYPAD_COLUMNS; l_column_counter++)
 		{
@@ -117,15 +126,20 @@ void H_KEYPAD_u8_WriteOnDigits(keypad_digit_t *digits_obj)
 
 			if(row_logic == GPIO_LOW)
 			{
-				digits_obj->digits[digits_obj->cursor] = btn_values2[l_row_counter][l_column_counter];
-				digits_obj->cursor += 1;
+				if(digits_obj->cursor < 4)
+				{
+					digits_obj->digits[digits_obj->cursor] = btn_values2[l_row_counter][l_column_counter];
+					digits_obj->pass_digits[digits_obj->cursor] = btn_values2_pass[l_row_counter][l_column_counter];
+					digits_obj->cursor += 1;
+				}
+
+				if(btn_values2[l_row_counter][l_column_counter] == '-')
+				{
+					digits_obj->cursor = 0;
+				}
+
 			}
 			else{/* Nothing */}
-
-			if(btn_values2[l_row_counter][l_column_counter] == '#')
-			{
-				digits_obj->cursor = 0;
-			}
 		}
 	}
 }

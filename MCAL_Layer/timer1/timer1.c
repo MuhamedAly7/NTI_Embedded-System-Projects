@@ -43,6 +43,9 @@ Error_Status_t Timer1_Init(const timer1_t *timer1_obj)
 			case TIMER1_INPUT_CAPTURE_FALLING_EDGE:
 				TIMER1_ICU_TRIGGER_FALLING_EDGE();
 				break;
+			default:
+				ret_status = OUT_OF_RANGE_VALUE;
+				break;
 		}
 	}
 	return ret_status;
@@ -68,6 +71,8 @@ Error_Status_t Timer1_start(const timer1_t *timer1_obj)
 			DIO_voidSetPinDirection(PORTD_INDEX, PIN4_INDEX, GPIO_DIRECTION_OUTPUT);
 			DIO_voidSetPinDirection(PORTD_INDEX, PIN5_INDEX, GPIO_DIRECTION_OUTPUT);
 			DIO_voidSetPinDirection(PORTD_INDEX, PIN6_INDEX, GPIO_DIRECTION_INPUT);
+
+			/* Initialize first value of OCR registers */
 			TIMER1_CONTROL->OCR1AL_CFG = 0;
 			TIMER1_CONTROL->OCR1AH_CFG = 0;
 			TIMER1_CONTROL->OCR1BL_CFG = 0;
@@ -87,16 +92,17 @@ Error_Status_t Timer1_stop(const timer1_t *timer1_obj)
 	}
 	else
 	{
+		// assign no pre-scaler to pre-scaler select bits
 		TIMER1_CONTROL->TCCR1B_CFG.CS1_BITS = TIMER1_STOP_TIMER;
 	}
 	return ret_status;
 }
 
 
-Error_Status_t Timer1_GetCounts(const timer1_t *timer1_obj, u16 *Num_of_count)
+Error_Status_t Timer1_GetCounts(u16 *Num_of_count)
 {
 	Error_Status_t ret_status = NO_ERROR;
-	if((NULL == timer1_obj) || (NULL == Num_of_count))
+	if(NULL == Num_of_count)
 	{
 		ret_status = NULL_POINTER;
 	}
@@ -108,7 +114,19 @@ Error_Status_t Timer1_GetCounts(const timer1_t *timer1_obj, u16 *Num_of_count)
 }
 
 
-Error_Status_t Timer1_setDelayTimeMilliSec(const timer1_t *timer1_obj, u8 Time_ms);
+Error_Status_t Timer1_setDelayTimeMilliSec(const timer1_t *timer1_obj, u8 Time_ms)
+{
+	Error_Status_t ret_status = NO_ERROR;
+	if(NULL == timer1_obj)
+	{
+		ret_status = NULL_POINTER;
+	}
+	else
+	{
+
+	}
+	return ret_status;
+}
 
 
 Error_Status_t Timer1_OVF_IntEnable(void)
@@ -230,8 +248,35 @@ Error_Status_t Timer1_ICU_setCallBack(const timer1_t *timer1_obj)
 	return ret_status;
 }
 
-Error_Status_t Timer1_setFastPWM(const timer1_t *timer1_obj, u8 frequency ,u8 duty);
-Error_Status_t Timer1_setphaseCorrectPWM(const timer1_t *timer1_obj,u8 frequency , u8 duty);
+
+Error_Status_t Timer1_setFastPWM(const timer1_t *timer1_obj, u8 frequency ,u8 duty)
+{
+	Error_Status_t ret_status = NO_ERROR;
+	if(NULL == timer1_obj)
+	{
+		ret_status = NULL_POINTER;
+	}
+	else
+	{
+
+	}
+	return ret_status;
+}
+
+
+Error_Status_t Timer1_setphaseCorrectPWM(const timer1_t *timer1_obj,u8 frequency , u8 duty)
+{
+	Error_Status_t ret_status = NO_ERROR;
+	if(NULL == timer1_obj)
+	{
+		ret_status = NULL_POINTER;
+	}
+	else
+	{
+
+	}
+	return ret_status;
+}
 
 
 Error_Status_t Timer1_ICU_SetTrigger(u8 trigger)
@@ -265,6 +310,7 @@ Error_Status_t Timer1_ICU_takeReading(u16 *icr_reading)
 	}
 	return ret_status;
 }
+
 
 
 /* ---------------------------------------- ISRs ---------------------------- */

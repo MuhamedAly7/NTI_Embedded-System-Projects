@@ -61,6 +61,16 @@
 #define TIMER0_PHASE_CORRECT_PWM_NORMAL_PORT                   0
 #define TIMER0_PHASE_CORRECT_PWM_CLEAR_OC0_ON_COMPARE_MATCH    2
 #define TIMER0_PHASE_CORRECT_PWM_SET_OC0_ON_COMPARE_MATCH      3
+
+
+#define TIMER0_OVF_INT_ENABLE             0
+#define TIMER0_CTC_INT_ENABLE             1
+
+#define TIMER0_OVF_INT_DISABLE             2
+#define TIMER0_CTC_INT_DISABLE             3
+
+
+#define F_CPU    16
 /* ----------------------------------------------- macros functions ----------------------- */
 
 
@@ -80,9 +90,9 @@ Error_Status_t Timer0_Init(const timer0_t *timer0_obj);
 Error_Status_t Timer0_start(const timer0_t *timer0_obj);
 Error_Status_t Timer0_stop(const timer0_t *timer0_obj);
 Error_Status_t Timer0_GetCounts(const timer0_t *timer0_obj, u8 *Num_of_count);
-Error_Status_t Timer0_setDelayTimeMilliSec(const timer0_t *timer0_obj, u8 Time_ms);
-Error_Status_t Timer0_EnableInt(void);
-Error_Status_t Timer0_DisableInt(void);
+Error_Status_t Timer0_setDelayTimeMilliSec(const timer0_t *timer0_obj , u8 Time_ms, u32 *num_of_ovfs, u32 *rem_counts);
+Error_Status_t Timer0_EnableInt(u8 Int_ID);
+Error_Status_t Timer0_DisableInt(u8 Int_ID);
 Error_Status_t Timer0_setCallBack(const timer0_t *timer0_obj);
 Error_Status_t Timer0_setFastPWM(const timer0_t *timer0_obj, u8 frequency ,u8 duty);
 Error_Status_t Timer0_setphaseCorrectPWM(const timer0_t *timer0_obj,u8 frequency , u8 duty);

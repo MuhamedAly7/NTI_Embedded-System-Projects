@@ -13,11 +13,14 @@ RM := rm -rf
 -include MCAL_Layer/interrupt/subdir.mk
 -include MCAL_Layer/UART/subdir.mk
 -include MCAL_Layer/SPI/subdir.mk
+-include MCAL_Layer/I2C/subdir.mk
 -include MCAL_Layer/GPIO/subdir.mk
 -include MCAL_Layer/ADC/subdir.mk
 -include ECU_Layer/lcd/subdir.mk
 -include ECU_Layer/SevenSegment/subdir.mk
+-include ECU_Layer/RTC/subdir.mk
 -include ECU_Layer/Keypad/subdir.mk
+-include ECU_Layer/EEROM/subdir.mk
 -include subdir.mk
 -include objects.mk
 

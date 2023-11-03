@@ -22,8 +22,18 @@
 /* ------------------------------------Data types ----------------------------- */
 
 // additional types
+/* this type to help us to write things
+ * in specific number of digits represented
+ * in array of character and we can customize
+ * the number of digits, we have two array,
+ * one to display the right things that i write it
+ * and other array to display wrote digits by '*',
+ * in case if we write password and we won't to display
+ * the real digits and we have cursor to point to the wanted place
+ * to write the digits.  */
 typedef struct{
     u8 digits[5];
+    u8 pass_digits[5];
     u8 cursor;
 }keypad_digit_t;
 

@@ -5,49 +5,52 @@
  *      Author: Mohamed Aly
  */
 
-
 #include "main.h"
 
-u8 dum1 = 0;
-
-void Spi_Isr(void)
-{
-	DIO_voidSetPinValue(PORTA_INDEX, PIN1_INDEX, GPIO_HIGH);
-	dum1 = SPI_MAP->SPDR_CFG;
-	DIO_voidSetPinValue(PORTA_INDEX, PIN2_INDEX, GPIO_HIGH);
-}
-
 Error_Status_t ret_status = NO_ERROR;
-//u8 rec_byte;
 
-SPI_T my_spi = {.MasterSlaveSelect = MASTER_CONFIG};
+u8 rec_data;
 
-u8 dummy_spi;
+RTC_TIME_T my_time = {.hour = 22,
+		.min = 28,
+		.sec = 0,
+		.ampm = 0};
 
-u8 string[] = "HELLO";
+RTC_DATE_T my_date = {.year = 23,
+		.month = 11,
+		.day = 3};
+
+
+RTC_TIME_T rec_time;
+RTC_DATE_T rec_date;
+
+char buffer1[50];
+char buffer2[50];
 
 int main()
 {
-	ret_status = SPI_Init(&my_spi);
-	DIO_voidSetPinDirection(PORTA_INDEX, PIN1_INDEX, GPIO_DIRECTION_OUTPUT);
-	DIO_voidSetPinDirection(PORTA_INDEX, PIN2_INDEX, GPIO_DIRECTION_OUTPUT);
+	H_LCD_void_Init();
+	RTC_Init(I2C_FREQ_100HZ);
+	RTC_SetTime(&my_time);
+	RTC_SetDate(&my_date);
+
 	while (1)
 	{
-//		ret_status = SPI_AsynchCallBack(Spi_Isr, 'A');
-//		_delay_ms(1000);
-//		DIO_voidSetPinValue(PORTA_INDEX, PIN1_INDEX, GPIO_LOW);
-//		DIO_voidSetPinValue(PORTA_INDEX, PIN1_INDEX, GPIO_LOW);
-//		_delay_ms(1000);
+		_delay_ms(20);
+		RTC_GetTime(&rec_time);
+		_delay_ms(20);
+		_delay_ms(20);
+		RTC_GetDate(&rec_date);
+		_delay_ms(20);
 
-		DIO_voidSetPinValue(PORTA_INDEX, PIN1_INDEX, GPIO_HIGH);
-		DIO_voidSetPinValue(PORTA_INDEX, PIN2_INDEX, GPIO_HIGH);
-		_delay_ms(1000);
-		ret_status = SPI_Transfere('A', &dummy_spi);
-		//ret_status = SPI_AsynchCallBack(Spi_Isr, 'A');
-		_delay_ms(1000);
-		DIO_voidSetPinValue(PORTA_INDEX, PIN1_INDEX, GPIO_LOW);
-		DIO_voidSetPinValue(PORTA_INDEX, PIN2_INDEX, GPIO_LOW);
-		_delay_ms(1000);
+		sprintf(buffer1, "%02d:%02d:%02d", rec_time.hour, rec_time.min, rec_time.sec);
+		sprintf(buffer2, "%02d:%02d:%02d", rec_date.month, rec_date.day, rec_date.year);
+		H_LCD_void_gotoXY(2, 1);
+		H_LCD_void_SendString("Time : ");
+		H_LCD_void_SendString(buffer1);
+		H_LCD_void_gotoXY(3, 1);
+		H_LCD_void_SendString("Date : ");
+		H_LCD_void_SendString(buffer2);
 	}
 	return 0;
 }

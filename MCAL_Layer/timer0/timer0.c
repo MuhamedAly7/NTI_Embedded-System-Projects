@@ -7,8 +7,17 @@
 
 #include "timer0.h"
 
+// pointer to function to execute callback function of overflow interrupt
 void (*Timer0_Over_Flow_isr)(void) = NULL;
+
+// pointer to function to execute callback function of compare match interrupt
 void(*Timer0_Comp_isr)(void) = NULL;
+
+//void (*Timer0_delay_callback)(void) = NULL;
+//
+//u32 num_of_ovfs = 0;
+//u32 rem_counts = 0;
+//static u32 countr_ovf = 0;
 
 
 Error_Status_t Timer0_Init(const timer0_t *timer0_obj)
@@ -26,7 +35,7 @@ Error_Status_t Timer0_Init(const timer0_t *timer0_obj)
 
 		// To select the output compare match pin
 		TIMER0_CONTROL->TCCR0_CFG.COM0_BITS = timer0_obj->ctc_mode_cfg;
-		}
+	}
 	return ret_status;
 }
 
@@ -63,6 +72,7 @@ Error_Status_t Timer0_stop(const timer0_t *timer0_obj)
 	}
 	else
 	{
+		// assign no pre-scaler to pre-scaler select bits
 		TIMER0_CONTROL->TCCR0_CFG.CS0_BITS = TIMER0_STOP_TIMER;
 	}
 	return ret_status;
@@ -83,9 +93,11 @@ Error_Status_t Timer0_GetCounts(const timer0_t *timer0_obj, u8 *Num_of_count)
 
 
 
-Error_Status_t Timer0_setDelayTimeMilliSec(const timer0_t *timer0_obj, u8 Time_ms)
+Error_Status_t Timer0_setDelayTimeMilliSec(const timer0_t *timer0_obj , u8 Time_ms, u32 *num_of_ovfs, u32 *rem_counts)
 {
 	Error_Status_t ret_status = NO_ERROR;
+	u32 Total_counts = 0;
+
 	if(NULL == timer0_obj)
 	{
 		ret_status = NULL_POINTER;
@@ -94,7 +106,28 @@ Error_Status_t Timer0_setDelayTimeMilliSec(const timer0_t *timer0_obj, u8 Time_m
 	{
 		if(TIMER0_NORMAL_MODE == timer0_obj->mode)
 		{
-
+			switch(timer0_obj->prescaler_select){
+			case TIMER0_PRESCALER_DIV_1:
+				Total_counts = (F_CPU * Time_ms * 1000) / 1;    // 1 : prescaler
+				break;
+			case TIMER0_PRESCALER_DIV_8:
+				Total_counts = (F_CPU * Time_ms * 1000) / 8;    // 8 : prescaler
+				break;
+			case TIMER0_PRESCALER_DIV_64:
+				Total_counts = (F_CPU * Time_ms * 1000) / 64;   // 64 : prescaler
+				break;
+			case TIMER0_PRESCALER_DIV_256:
+				Total_counts = (F_CPU * Time_ms * 1000) / 256;  // 256 : prescaler
+				break;
+			case TIMER0_PRESCALER_DIV_1024:
+				Total_counts = (F_CPU * Time_ms * 1000) / 1024;  // 1024 : prescaler
+				break;
+			default:
+				ret_status = OUT_OF_RANGE_VALUE;
+				break;
+			}
+			*num_of_ovfs = (u32)(Total_counts / 256);
+			*rem_counts = Total_counts % 256;
 		}
 		else if(TIMER0_CTC_MODE == timer0_obj->mode)
 		{
@@ -108,26 +141,36 @@ Error_Status_t Timer0_setDelayTimeMilliSec(const timer0_t *timer0_obj, u8 Time_m
 
 
 
-Error_Status_t Timer0_EnableInt(void)
+Error_Status_t Timer0_EnableInt(u8 Int_ID)
 {
 	// Enable global interrupts
-	GIE_Enable();
-	// Enable timer0 overflow interrupt and compare match interrupt
-	TIMER0_CONTROL->TIMSK_CFG.TOIE0_BIT = 1;
-	TIMER0_CONTROL->TIMSK_CFG.OCIE0_BIT = 1;
 
+	// Enable timer0 overflow interrupt and compare match interrupt
+	switch(Int_ID){
+		case TIMER0_OVF_INT_ENABLE:
+			TIMER0_CONTROL->TIMSK_CFG.TOIE0_BIT = 1;
+			break;
+		case TIMER0_CTC_INT_ENABLE:
+			TIMER0_CONTROL->TIMSK_CFG.OCIE0_BIT = 1;
+			break;
+	}
 	return NO_ERROR;
 }
 
 
 
 
-Error_Status_t Timer0_DisableInt(void)
+Error_Status_t Timer0_DisableInt(u8 Int_ID)
 {
 	// Disable timer0 overflow interrupt and compare match interrupt
-	GIE_Disable();
-	TIMER0_CONTROL->TIMSK_CFG.OCIE0_BIT = 0;
-
+	switch(Int_ID){
+		case TIMER0_OVF_INT_DISABLE:
+			TIMER0_CONTROL->TIMSK_CFG.TOIE0_BIT = 0;
+			break;
+		case TIMER0_CTC_INT_DISABLE:
+			TIMER0_CONTROL->TIMSK_CFG.OCIE0_BIT = 0;
+			break;
+	}
 	return NO_ERROR;
 }
 
@@ -178,27 +221,27 @@ Error_Status_t Timer0_setFastPWM(const timer0_t *timer0_obj, u8 frequency ,u8 du
 Error_Status_t Timer0_setphaseCorrectPWM(const timer0_t *timer0_obj, u8 frequency , u8 duty)
 {
 	Error_Status_t ret_status = NO_ERROR;
-		if(NULL == timer0_obj)
+	if(NULL == timer0_obj)
+	{
+		ret_status = NULL_POINTER;
+	}
+	else
+	{
+		if(TIMER0_PWM_PHASE_CORRECT_MODE == timer0_obj->mode)
 		{
-			ret_status = NULL_POINTER;
-		}
-		else
-		{
-			if(TIMER0_PWM_PHASE_CORRECT_MODE == timer0_obj->mode)
+			if(TIMER0_PHASE_CORRECT_PWM_CLEAR_OC0_ON_COMPARE_MATCH == timer0_obj->ctc_mode_cfg)
 			{
-				if(TIMER0_PHASE_CORRECT_PWM_CLEAR_OC0_ON_COMPARE_MATCH == timer0_obj->ctc_mode_cfg)
-				{
-					TIMER0_CONTROL->OCR0_CFG = (u8)(((u8)(duty * 255) / 100) / 2);
-				}
-				else if(TIMER0_PHASE_CORRECT_PWM_SET_OC0_ON_COMPARE_MATCH == timer0_obj->ctc_mode_cfg)
-				{
-					TIMER0_CONTROL->OCR0_CFG = (u8)(255 - ((u8)((duty * 255) / 100) / 2));
-				}
-				else{/* Nothing */}
+				TIMER0_CONTROL->OCR0_CFG = (u8)(((u8)(duty * 255) / 100) / 2);
+			}
+			else if(TIMER0_PHASE_CORRECT_PWM_SET_OC0_ON_COMPARE_MATCH == timer0_obj->ctc_mode_cfg)
+			{
+				TIMER0_CONTROL->OCR0_CFG = (u8)(255 - ((u8)((duty * 255) / 100) / 2));
 			}
 			else{/* Nothing */}
 		}
-		return ret_status;
+		else{/* Nothing */}
+	}
+	return ret_status;
 }
 
 
@@ -210,6 +253,17 @@ void TIMER0_OVF_VECTOR(void)
 {
 	// Clear flag
 	TIMER0_CONTROL->TIFR_CFG.TOF0_BIT = 0;
+
+	//	countr_ovf++;
+	//	if(countr_ovf == num_of_ovfs)
+	//	{
+	//		TIMER0_CONTROL->TCNT0_CFG = 256 - rem_counts;
+	//		countr_ovf = 0;
+	//		if(Timer0_delay_callback)
+	//		{
+	//			Timer0_delay_callback();
+	//		}
+	//	}
 
 	// execute ISR if it existed
 	if(Timer0_Over_Flow_isr)
@@ -230,7 +284,7 @@ void TIMER0_COMPA_VECTOR(void)
 	// execute ISR if it existed
 	if(Timer0_Comp_isr)
 	{
-			Timer0_Comp_isr();
+		Timer0_Comp_isr();
 	}
 }
 

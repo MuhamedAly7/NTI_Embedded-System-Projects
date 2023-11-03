@@ -61,7 +61,6 @@ Error_Status_t SPI_AsynchCallBack(void (*spi_callback)(void), u8 ch)
 	}
 	else
 	{
-		GIE_Enable();
 		SPI_MAP->SPCR_CFG |= (0x01<<7);
 		spi_callbackfun = spi_callback;
 		SPI_MAP->SPDR_CFG = ch;

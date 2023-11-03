@@ -145,15 +145,23 @@ void H_LCD_void_gotoXY(u8 copy_u8Row,u8 copy_u8Col)
 		break;
 	}
 }
+
+
+
 void H_LCD_void_sendIntNum(u32 copy_s32Num)
 {
-	u8 num_of_digits = countDigits(copy_s32Num);
-	u8 temp_str[num_of_digits + 1];
-	memset(temp_str, ' ', num_of_digits);
-	temp_str[num_of_digits] = '\0';
-	sprintf((u8 *)temp_str, "%i", copy_s32Num);
-	H_LCD_void_SendString(temp_str);
+//	u8 num_of_digits = countDigits(copy_s32Num);
+//	u8 temp_str[num_of_digits];
+//	memset(temp_str, ' ', num_of_digits);
+//	temp_str[num_of_digits] = '\0';
+//	sprintf((u8 *)temp_str, "%i", copy_s32Num);
+//	H_LCD_void_SendString(temp_str);
+
+	char buffer[11];  // A 32-bit number, maximum 10 digits
+	itoa(copy_s32Num, buffer, 10);  // Convert the number to a string
+	H_LCD_void_SendString(buffer);
 }
+
 
 
 void H_LCD_void_Clear_Display(void)
@@ -184,22 +192,22 @@ void H_LCD_void_displayCustomChar(u8 copy_u8charCode)
 
 
 /* --------------------------------------- helper function --------------------------------------- */
-u8 countDigits(s32 number) {
-    u8 count = 0;
-
-    // Handle the case where the number is 0 separately
-    if (number == 0) {
-        return 1;
-    }
-    // For negative numbers, convert to positive before counting digits
-    if (number < 0) {
-    	number = -1 * number;
-    }
-    // Count the digits by dividing by 10 until the number becomes 0
-    while (number != 0) {
-        number /= 10;
-        ++count;
-    }
-
-    return count;
-}
+//u8 countDigits(s32 number) {
+//    u8 count = 0;
+//
+//    // Handle the case where the number is 0 separately
+//    if (number == 0) {
+//        return 1;
+//    }
+//    // For negative numbers, convert to positive before counting digits
+//    if (number < 0) {
+//    	number = -1 * number;
+//    }
+//    // Count the digits by dividing by 10 until the number becomes 0
+//    while (number != 0) {
+//        number /= 10;
+//        ++count;
+//    }
+//
+//    return count;
+//}

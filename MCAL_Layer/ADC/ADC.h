@@ -69,26 +69,31 @@
 #define ADC_SELECT_TRIGGER_TIMER1_OVERFLOW            6
 #define ADC_SELECT_TRIGGER_TIMER1_CAPTURE_EVENT       7
 
+
+// To select Adjustification
+#define ADC_RIGHT_JUSTIFY                       0
+#define ADC_LEFT_JUSTIFY                        1
+
 /* ------------------ Macro Function Declarations Start --------------- */
 
 // To Enable or Disable ADC
-#define ADC_ENABLE_CFG()                          (ADC_MAP->ADCSRA_REG.ADEN = ADC_ENABLE)
-#define ADC_DISABLE_CFG()                         (ADC_MAP->ADCSRA_REG.ADEN = ADC_DISABLE)
+#define ADC_ENABLE_CFG()                          (ADC_CONTROL->ADCSRA_REG.ADEN_BIT = ADC_ENABLE)
+#define ADC_DISABLE_CFG()                         (ADC_CONTROL->ADCSRA_REG.ADEN_BIT = ADC_DISABLE)
 // To start conversion
-#define ADC_START_CONVERSION_CFG()                (ADC_MAP->ADCSRA_REG.ADSC = ADC_START_CONVERSION)
+#define ADC_START_CONVERSION_CFG()                (ADC_CONTROL->ADCSRA_REG.ADSC_BIT = ADC_START_CONVERSION)
 // To enable or disable auto trigger
-#define ADC_AUTO_TRIGGER_ENABLE_CONFIG()          (ADC_MAP->ADCSRA_REG.ADATE = ADC_AUTO_TRIGGER_ENABLE)
-#define ADC_AUTO_TRIGGER_DISABLE_CONFIG()         (ADC_MAP->ADCSRA_REG.ADATE = ADC_AUTO_TRIGGER_DISABLE)
+#define ADC_AUTO_TRIGGER_ENABLE_CONFIG()          (ADC_CONTROL->ADCSRA_REG.ADATE_BIT = ADC_AUTO_TRIGGER_ENABLE)
+#define ADC_AUTO_TRIGGER_DISABLE_CONFIG()         (ADC_CONTROL->ADCSRA_REG.ADATE_BIT = ADC_AUTO_TRIGGER_DISABLE)
 // to select trigger source
-#define ADC_SELECT_TRIGGER_SOURCE_EVENT(SOURCE)   (ADC_MAP->SFIOR_REG.ADTS = SOURCE)
+#define ADC_SELECT_TRIGGER_SOURCE_EVENT(SOURCE)   (ADC_CONTROL->SFIOR_REG.ADTS_BITS = SOURCE)
 // To select voltage reference
-#define ADC_SELECT_VOLTAGE_REF_CFG(REF)           (ADC_MAP->ADMUX_REG.REFS = REF)
+#define ADC_SELECT_VOLTAGE_REF_CFG(REF)           (ADC_CONTROL->ADMUX_REG.REFS_BITS = REF)
 // To select channels
-#define ADC_SELECT_CHANNEL_CFG(CHANNEL)           (ADC_MAP->ADMUX_REG.MUX = CHANNEL)
+#define ADC_SELECT_CHANNEL_CFG(CHANNEL)           (ADC_CONTROL->ADMUX_REG.MUX_BITS = CHANNEL)
 // To select adjustification
-#define ADC_SELECT_ADJUSTTFICATION(ADJUST)        (ADC_MAP->ADMUX_REG.ADLAR = ADJUST)
+#define ADC_SELECT_ADJUSTTFICATION(ADJUST)        (ADC_CONTROL->ADMUX_REG.ADLAR_BIT = ADJUST)
 // To select prescaler
-#define ADC_SELECT_PRESCALER(PRESCALER)           (ADC_MAP->ADCSRA_REG.ADPS = PRESCALER)
+#define ADC_SELECT_PRESCALER(PRESCALER)           (ADC_CONTROL->ADCSRA_REG.ADPS_BITS = PRESCALER)
 
 
 
@@ -106,5 +111,5 @@ typedef struct{
 
 /* --------------- Software Interfaces Declarations Start ------------- */
 void ADC_voidInit(const ADC_cfg_t *ADC_obj);
-void ADC_getDigitalValueSynchNonBlocking(u8 Copy_u8Channel);
+void ADC_getDigitalValueSynchNonBlocking(const ADC_cfg_t *ADC_obj, u8 Copy_u8Channel, u16 *result);
 #endif /* MCAL_LAYER_ADC_ADC_H_ */

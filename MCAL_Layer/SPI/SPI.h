@@ -13,7 +13,6 @@
 #include "../std_libraries.h"
 #include "../GPIO/GPIO.h"
 #include "../../math.h"
-#include "../interrupt/GIE_interrupt.h"
 
 #define SPI_VECTOR __vector_12
 
