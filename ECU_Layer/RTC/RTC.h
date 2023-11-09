@@ -30,7 +30,9 @@ typedef struct {
 	u8 hour;
 	u8 min;
 	u8 sec;
+#if RTC_TIME_SYSTEM == RTC_12HR_SYSTEM
 	time_format_t ampm;
+#endif
 }RTC_TIME_T;
 
 typedef struct {

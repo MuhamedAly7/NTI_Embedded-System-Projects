@@ -18,7 +18,7 @@ Error_Status_t UART_Init(void)
 	UART_CONTROL->UBRRH_UCSRC_CFG = (u8)(baud >> 8);
 	UART_CONTROL->UBRRL_CFG = (u8)(baud);
 
-	// Enable transmtter and receiver
+	// Enable transmitter and receiver
 	u8 rx_tx = (0x01<<4) | (0x01<<3);
 	UART_CONTROL->UCSRB_CFG = rx_tx;
 
@@ -37,6 +37,8 @@ Error_Status_t UART_SendByte(u8 ch)
 	UART_CONTROL->UDR_CFG = ch;
 	return ret_status;
 }
+
+
 Error_Status_t UART_ReceiveByte(u8 *RecByte)
 {
 	Error_Status_t ret_status = NO_ERROR;
@@ -44,6 +46,8 @@ Error_Status_t UART_ReceiveByte(u8 *RecByte)
 	*RecByte = UART_CONTROL->UDR_CFG;
 	return ret_status;
 }
+
+
 Error_Status_t UART_SendString(u8 *Str)
 {
 	Error_Status_t ret_status = NO_ERROR;

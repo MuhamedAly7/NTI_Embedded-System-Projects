@@ -13,7 +13,6 @@
 #include "timer1_priv.h"
 #include "../std_types.h"
 #include "../std_libraries.h"
-#include "../GPIO/GPIO.h"
 
 /* ----------------------------------------------- macros objects ------------------------- */
 
@@ -84,6 +83,8 @@
 #define TIMER1_INPUT_CAPTURE_FALLING_EDGE            0
 #define TIMER1_INPUT_CAPTURE_RISING_EDGE             1
 
+#define FCPU     16000000UL
+
 /* ----------------------------------------------- macros functions ----------------------- */
 // These two macros to select the edge of triggering if ICU on timer1
 #define TIMER1_ICU_TRIGGER_RISING_EDGE()           (TIMER1_CONTROL->TCCR1B_CFG.ICES1_BIT = TIMER1_INPUT_CAPTURE_RISING_EDGE)
@@ -127,5 +128,5 @@ Error_Status_t Timer1_ICU_takeReading(u16 *icr_reading);
 Error_Status_t Timer1_setFastPWM(const timer1_t *timer1_obj, u8 frequency ,u8 duty);
 Error_Status_t Timer1_setphaseCorrectPWM(const timer1_t *timer1_obj,u8 frequency , u8 duty);
 
-
+u16 prescaler_map(u8 mapped_value);
 #endif /* MCAL_LAYER_TIMER1_TIMER1_H_ */

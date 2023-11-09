@@ -22,15 +22,19 @@ C_DEPS :=
 # Every subdirectory with source files must be described here
 SUBDIRS := \
 ECU_Layer/EEROM \
+ECU_Layer/FingerPrint \
 ECU_Layer/Keypad \
+ECU_Layer/LED \
 ECU_Layer/RTC \
 ECU_Layer/SevenSegment \
+ECU_Layer/Ultrasonic \
 ECU_Layer/lcd \
 MCAL_Layer/ADC \
 MCAL_Layer/GPIO \
 MCAL_Layer/I2C \
 MCAL_Layer/SPI \
 MCAL_Layer/UART \
+MCAL_Layer/WatchDog \
 MCAL_Layer/interrupt \
 MCAL_Layer/timer0 \
 MCAL_Layer/timer1 \

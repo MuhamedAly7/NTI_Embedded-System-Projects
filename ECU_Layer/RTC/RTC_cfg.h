@@ -16,7 +16,7 @@
  * RTC_24HR_SYSTEM : To deal with 24-hour system
  * RTC_12HR_SYSTEM : To deal with 12-hour system
  * */
-#define RTC_TIME_SYSTEM        RTC_12HR_SYSTEM
+#define RTC_TIME_SYSTEM        RTC_24HR_SYSTEM
 
 
 #endif /* ECU_LAYER_RTC_RTC_CFG_H_ */

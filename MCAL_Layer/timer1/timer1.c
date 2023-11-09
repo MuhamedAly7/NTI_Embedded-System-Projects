@@ -8,11 +8,12 @@
 
 #include "timer1.h"
 
-// callbcaks for ISRs
+/* ------------------------------------- CallBacks for ISRs ----------------------------- */
 void (*Timer1_Over_Flow_isr)(void) = NULL;
 void(*Timer1_CompB_isr)(void) = NULL;
 void(*Timer1_CompA_isr)(void) = NULL;
 void(*Timer1_Capt_isr)(void) = NULL;
+/* ---------------------------------------------------------------------------------------*/
 
 Error_Status_t Timer1_Init(const timer1_t *timer1_obj)
 {
@@ -68,9 +69,6 @@ Error_Status_t Timer1_start(const timer1_t *timer1_obj)
 		else
 		{
 			TIMER1_CONTROL->TCCR1B_CFG.CS1_BITS = timer1_obj->prescaler_select;
-			DIO_voidSetPinDirection(PORTD_INDEX, PIN4_INDEX, GPIO_DIRECTION_OUTPUT);
-			DIO_voidSetPinDirection(PORTD_INDEX, PIN5_INDEX, GPIO_DIRECTION_OUTPUT);
-			DIO_voidSetPinDirection(PORTD_INDEX, PIN6_INDEX, GPIO_DIRECTION_INPUT);
 
 			/* Initialize first value of OCR registers */
 			TIMER1_CONTROL->OCR1AL_CFG = 0;
@@ -108,7 +106,7 @@ Error_Status_t Timer1_GetCounts(u16 *Num_of_count)
 	}
 	else
 	{
-		*Num_of_count = (u16)(((TIMER1_CONTROL->TCNT1H_CFG) << 8) + (TIMER1_CONTROL->TCNT1L_CFG));
+		*Num_of_count = TIMER1_CONTROL->TCNT1_CFG;
 	}
 	return ret_status;
 }
@@ -306,12 +304,24 @@ Error_Status_t Timer1_ICU_takeReading(u16 *icr_reading)
 	}
 	else
 	{
-		*icr_reading = (u16)(((TIMER1_CONTROL->ICR1H_CFG) << 8) + TIMER1_CONTROL->ICR1L_CFG);
+		*icr_reading = TIMER1_CONTROL->ICR1_CFG;
 	}
 	return ret_status;
 }
 
 
+/* -------------------------------------------------- Helper functions ---------------------------------- */
+u16 prescaler_map(u8 mapped_value)
+{
+    switch(mapped_value){
+        case TIMER1_PRESCALER_DIV_1:return 1;
+        case TIMER1_PRESCALER_DIV_8:return 8;
+        case TIMER1_PRESCALER_DIV_64:return 64;
+        case TIMER1_PRESCALER_DIV_256:return 256;
+        case TIMER1_PRESCALER_DIV_1024:return 1024;
+        default:return 1;
+    }
+}
 
 /* ---------------------------------------- ISRs ---------------------------- */
 // Define the ISR function with attribute

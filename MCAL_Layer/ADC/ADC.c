@@ -41,7 +41,9 @@ void ADC_getDigitalValueSynchNonBlocking(const ADC_cfg_t *ADC_obj, u8 Copy_u8Cha
 
 	if(ADC_obj->adjustification_select == ADC_RIGHT_JUSTIFY)
 	{
-		*result = (u16)((ADC_CONTROL->ADCH_REG << 8) + ADC_CONTROL->ADCL_REG);
+//		*result = (u16)((ADC_CONTROL->ADCH_REG << 8) + ADC_CONTROL->ADCL_REG);
+		*result = (u16)((ADC_CONTROL->ADCH_REG) << 8);
+		*result += (u16)ADC_CONTROL->ADCL_REG;
 	}
 	else if(ADC_obj->adjustification_select == ADC_LEFT_JUSTIFY)
 	{

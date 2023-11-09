@@ -15,12 +15,12 @@ void DIO_voidSetPinDirection(u8 Copy_u8PortId, u8 Copy_u8PinId,  u8 Copy_u8Direc
 	if((Copy_u8PortId <= NUM_PORTS-1) && Copy_u8PinId <= NUM_PINS-1)
 	{
 		switch(Copy_u8Direction){
-			case(GPIO_DIRECTION_OUTPUT):
-				SET_BIT(Ports_index[Copy_u8PortId]->DDRx, Copy_u8PinId);
-			break;
-			case(GPIO_DIRECTION_INPUT):
-				CLEAR_BIT(Ports_index[Copy_u8PortId]->DDRx, Copy_u8PinId);
-			break;
+		case(GPIO_DIRECTION_OUTPUT):
+						SET_BIT(Ports_index[Copy_u8PortId]->DDRx, Copy_u8PinId);
+		break;
+		case(GPIO_DIRECTION_INPUT):
+						CLEAR_BIT(Ports_index[Copy_u8PortId]->DDRx, Copy_u8PinId);
+		break;
 		}
 	}
 	else{/* Nothing */}
@@ -33,12 +33,21 @@ void DIO_voidSetPinValue(u8 Copy_u8PortId, u8 Copy_u8PinId, u8 Copy_u8Value)
 	{
 		switch(Copy_u8Value){
 		case(GPIO_HIGH):
-		SET_BIT(Ports_index[Copy_u8PortId]->PORTx, Copy_u8PinId);
+				SET_BIT(Ports_index[Copy_u8PortId]->PORTx, Copy_u8PinId);
 		break;
 		case(GPIO_LOW):
-		CLEAR_BIT(Ports_index[Copy_u8PortId]->PORTx, Copy_u8PinId);
+				CLEAR_BIT(Ports_index[Copy_u8PortId]->PORTx, Copy_u8PinId);
 		break;
 		}
+	}
+	else{/* Nothing */}
+}
+
+void DIO_voidTogglePinValue(u8 Copy_u8PortId, u8 Copy_u8PinId)
+{
+	if((Copy_u8PortId <= NUM_PORTS-1) && (Copy_u8PinId <= NUM_PINS-1))
+	{
+		TOGGLE_BIT(Ports_index[Copy_u8PortId]->PORTx,Copy_u8PinId);
 	}
 	else{/* Nothing */}
 }
@@ -66,7 +75,7 @@ void DIO_voidSetPortDirection(u8 Copy_u8PortId,  u8 Copy_u8Direction)
 void DIO_voidSetPortValues(u8 Copy_u8PortId, u8 Copy_u8Value)
 {
 	if(Copy_u8PortId <= NUM_PORTS-1){
-    Ports_index[Copy_u8PortId]->PORTx = Copy_u8Value;
+		Ports_index[Copy_u8PortId]->PORTx = Copy_u8Value;
 	}
 	else{/* Nothing */}
 }

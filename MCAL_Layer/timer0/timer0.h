@@ -70,7 +70,6 @@
 #define TIMER0_CTC_INT_DISABLE             3
 
 
-#define F_CPU    16
 /* ----------------------------------------------- macros functions ----------------------- */
 
 

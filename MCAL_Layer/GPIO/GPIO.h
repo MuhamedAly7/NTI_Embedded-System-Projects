@@ -57,6 +57,7 @@ typedef enum{
 /*------------------------------------------API's------------------------------------------------*/
 void DIO_voidSetPinDirection(u8 Copy_u8PortId, u8 Copy_u8PinId,  u8 Copy_u8Direction);
 void DIO_voidSetPinValue(u8 Copy_u8PortId, u8 Copy_u8PinId, u8 Copy_u8Value);
+void DIO_voidTogglePinValue(u8 Copy_u8PortId, u8 Copy_u8PinId);
 u8 DIO_u8GetPinValue(u8 Copy_u8PortId, u8 Copy_u8PinId);
 void DIO_voidSetPortDirection(u8 Copy_u8PortId,  u8 Copy_u8Direction);
 void DIO_voidSetPortValues(u8 Copy_u8PortId, u8 Copy_u8Value);
