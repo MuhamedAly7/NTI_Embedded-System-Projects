@@ -8,6 +8,11 @@ RM := rm -rf
 
 # All of the sources participating in the build are defined here
 -include sources.mk
+-include Mini_projects/small_os_project/subdir.mk
+-include Mini_projects/configurable_duty_cycle/subdir.mk
+-include Mini_projects/Login_System_Projects/subdir.mk
+-include Mini_projects/Cooling_system_project/subdir.mk
+-include Mini_projects/Biometric\ Attendance\ System/subdir.mk
 -include MCAL_Layer/timer1/subdir.mk
 -include MCAL_Layer/timer0/subdir.mk
 -include MCAL_Layer/interrupt/subdir.mk
@@ -21,10 +26,13 @@ RM := rm -rf
 -include ECU_Layer/Ultrasonic/subdir.mk
 -include ECU_Layer/SevenSegment/subdir.mk
 -include ECU_Layer/RTC/subdir.mk
+-include ECU_Layer/LM35/subdir.mk
 -include ECU_Layer/LED/subdir.mk
 -include ECU_Layer/Keypad/subdir.mk
 -include ECU_Layer/FingerPrint/subdir.mk
 -include ECU_Layer/EEROM/subdir.mk
+-include ECU_Layer/DC_Motor/subdir.mk
+-include ECU_Layer/Button/subdir.mk
 -include subdir.mk
 -include objects.mk
 

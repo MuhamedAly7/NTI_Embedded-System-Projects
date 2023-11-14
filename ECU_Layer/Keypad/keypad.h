@@ -32,8 +32,8 @@
  * the real digits and we have cursor to point to the wanted place
  * to write the digits.  */
 typedef struct{
-    u8 digits[5];
-    u8 pass_digits[5];
+    u8 digits[NUM_OF_DIGITS + 1];
+    u8 pass_digits[NUM_OF_DIGITS + 1];
     u8 cursor;
 }keypad_digit_t;
 

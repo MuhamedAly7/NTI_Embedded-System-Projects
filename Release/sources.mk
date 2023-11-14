@@ -21,10 +21,13 @@ C_DEPS :=
 
 # Every subdirectory with source files must be described here
 SUBDIRS := \
+ECU_Layer/Button \
+ECU_Layer/DC_Motor \
 ECU_Layer/EEROM \
 ECU_Layer/FingerPrint \
 ECU_Layer/Keypad \
 ECU_Layer/LED \
+ECU_Layer/LM35 \
 ECU_Layer/RTC \
 ECU_Layer/SevenSegment \
 ECU_Layer/Ultrasonic \
@@ -38,5 +41,10 @@ MCAL_Layer/WatchDog \
 MCAL_Layer/interrupt \
 MCAL_Layer/timer0 \
 MCAL_Layer/timer1 \
+Mini_projects/Biometric\ Attendance\ System \
+Mini_projects/Cooling_system_project \
+Mini_projects/Login_System_Projects \
+Mini_projects/configurable_duty_cycle \
+Mini_projects/small_os_project \
 . \
 

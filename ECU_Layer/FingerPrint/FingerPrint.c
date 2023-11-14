@@ -9,36 +9,6 @@
 
 
 
-u8 FingerPS_handShake(void)
-{
-	Error_Status_t ret_status = NO_ERROR;
-	u8 operation_status = SUCCESS;
-	u8 rec_byte = 0;
-	u8 handshakeCommand[] = {0xEF, 0x01, 0xFF, 0xFF, 0xFF, 0xFF, 0x01, 0x00, 0x03, 0x40, 0x00, 0x44};
-	u8 handshakeResponse[] = {0xEF, 0x01, 0xFF, 0xFF, 0xFF, 0xFF, 0x07, 0x00, 0x03, 0x00, 0x00, 0x0A};
-
-	for(u8 i = 0; i < sizeof(handshakeCommand); i++)
-	{
-		ret_status = UART_SendByte(handshakeCommand[i]);
-	}
-
-	// Receive and verify the response
-	for (u8 i = 0; i < sizeof(handshakeResponse); ++i)
-	{
-		ret_status = UART_ReceiveByte(&rec_byte);
-
-		if (rec_byte != handshakeResponse[i])
-		{
-			operation_status = ERROR;
-			break;
-		}
-
-	}
-	return operation_status;
-}
-
-
-
 u8 FingerPS_AuraNormal(void)
 {
 	Error_Status_t ret_status = NO_ERROR;
@@ -126,6 +96,48 @@ u8 FingerPS_AuraError(void)
 	return operation_status;
 }
 
+
+u8 FingerPS_handShake(void)
+{
+	Error_Status_t ret_status = NO_ERROR;
+	u8 operation_status = SUCCESS;
+	u8 rec_byte = 0;
+	u8 num_of_success = 0;
+	u8 handshakeCommand[] = {0xEF, 0x01, 0xFF, 0xFF, 0xFF, 0xFF, 0x01, 0x00, 0x03, 0x40, 0x00, 0x44};
+	u8 handshakeResponse[] = {0xEF, 0x01, 0xFF, 0xFF, 0xFF, 0xFF, 0x07, 0x00, 0x03, 0x00, 0x00, 0x0A};
+
+	/* Initialize UART module at 57600 baud rate */
+	ret_status = UART_Init(UART_BAUDRATE_57600);
+	/*-------------------------------------------*/
+
+	for(u8 i = 0; i < sizeof(handshakeCommand); i++)
+	{
+		ret_status = UART_SendByte(handshakeCommand[i]);
+	}
+
+	// Receive and verify the response
+	for (u8 i = 0; i < sizeof(handshakeResponse); ++i)
+	{
+		ret_status = UART_ReceiveByte(&rec_byte);
+
+		if (rec_byte == handshakeResponse[i])
+		{
+			num_of_success++;
+		}
+		else
+		{
+			operation_status = ERROR;
+			break;
+		}
+
+	}
+	if(num_of_success == sizeof(handshakeResponse))
+	{
+		operation_status = FingerPS_AuraNormal();
+		_delay_ms(200);
+	}
+	return operation_status;
+}
 
 
 u8 FingerPS_genImg(void)
@@ -368,6 +380,7 @@ u8 FingerPS_searchFinger(u16 *ret_pageid)
 	else
 	{
 		operation_status = FingerPS_AuraError();
+		*ret_pageid = 0;
 		_delay_ms(200);
 		operation_status = ERROR;
 	}
@@ -383,32 +396,32 @@ u8 FingerPS_Enrollment(u8 page_id, u16 *ret_id)
 
 	/* Search */
 	fp_status &= FingerPS_genImg();
-	_delay_ms(5);
+	_delay_ms(50);
 	fp_status &= FingerPS_convertImg2CharFile(0x01);
-	_delay_ms(5);
+	_delay_ms(50);
 	fp_status &= FingerPS_genImg();
-	_delay_ms(5);
+	_delay_ms(50);
 	fp_status &= FingerPS_convertImg2CharFile(0x02);
-	_delay_ms(5);
+	_delay_ms(50);
 	fp_status &= FingerPS_genTemplate();
-	_delay_ms(5);
+	_delay_ms(50);
 	fp_status &= FingerPS_searchFinger(ret_id);
 
 	if(fp_status == ERROR) // image not found before so i can start enrollment stage here
 	{
 		/* Enrollment */
-		fp_status &= FingerPS_genImg();
-		_delay_ms(5);
+		fp_status = FingerPS_genImg();
+		_delay_ms(50);
 		fp_status &= FingerPS_convertImg2CharFile(0x01);
-		_delay_ms(5);
+		_delay_ms(50);
 		fp_status &= FingerPS_genImg();
-		_delay_ms(5);
+		_delay_ms(50);
 		fp_status &= FingerPS_convertImg2CharFile(0x02);
-		_delay_ms(5);
+		_delay_ms(50);
 		fp_status &= FingerPS_genTemplate();
-		_delay_ms(5);
+		_delay_ms(50);
 		fp_status &= FingerPS_strTemplate(page_id);
-		*ret_id = NULL;
+		*ret_id = 0;
 	}
 	else // this case mean the image existed before and we can not enroll same finger in other location
 	{
@@ -420,21 +433,23 @@ u8 FingerPS_Enrollment(u8 page_id, u16 *ret_id)
 }
 
 
-void FingerPS_Attendance(u16 *ret_pageid)
+u8 FingerPS_Attendance(u16 *ret_pageid)
 {
 	u8 fp_status = SUCCESS;
 
 	/* attendance */
-	fp_status = FingerPS_genImg();
+	fp_status &= FingerPS_genImg();
 	_delay_ms(5);
-	fp_status = FingerPS_convertImg2CharFile(0x01);
+	fp_status &= FingerPS_convertImg2CharFile(0x01);
 	_delay_ms(5);
-	fp_status = FingerPS_genImg();
+	fp_status &= FingerPS_genImg();
 	_delay_ms(5);
-	fp_status = FingerPS_convertImg2CharFile(0x02);
+	fp_status &= FingerPS_convertImg2CharFile(0x02);
 	_delay_ms(5);
-	fp_status = FingerPS_genTemplate();
+	fp_status &= FingerPS_genTemplate();
 	_delay_ms(5);
-	fp_status = FingerPS_searchFinger(ret_pageid);
+	fp_status &= FingerPS_searchFinger(ret_pageid);
+
+	return fp_status;
 }
 

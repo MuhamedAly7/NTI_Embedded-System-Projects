@@ -36,6 +36,8 @@ static u8 rows_ports[4] = {KEYPAD_R1_PORT, KEYPAD_R2_PORT, KEYPAD_R3_PORT, KEYPA
 static u8 cols_ports[4] = {KEYPAD_C1_PORT, KEYPAD_C2_PORT, KEYPAD_C3_PORT, KEYPAD_C4_PORT};
 
 
+
+
 void H_KEYPAD_void_Init(void)
 {
 	// initialize rows to be output mode
@@ -50,6 +52,8 @@ void H_KEYPAD_void_Init(void)
 	DIO_voidSetPinDirection(KEYPAD_C3_PORT, KEYPAD_R3_PIN, GPIO_DIRECTION_INPUT);
 	DIO_voidSetPinDirection(KEYPAD_C4_PORT, KEYPAD_R4_PIN, GPIO_DIRECTION_INPUT);
 }
+
+
 
 void H_KEYPAD_u8_getPressedKey(u8 * pPressedKey)
 {
@@ -93,13 +97,14 @@ void keypad_cursor_init(keypad_digit_t *digits_obj)
 	if(NULL != digits_obj)
 	{
 		digits_obj->cursor = 0;
-		for(l_cursor = 0; l_cursor < 5; l_cursor++)
+		for(l_cursor = 0; l_cursor < NUM_OF_DIGITS + 1; l_cursor++)
 		{
 			digits_obj->digits[l_cursor] = 0;
 			digits_obj->pass_digits[l_cursor] = 0;
 		}
 	}
 }
+
 
 
 void H_KEYPAD_u8_WriteOnDigits(keypad_digit_t *digits_obj)
@@ -126,7 +131,7 @@ void H_KEYPAD_u8_WriteOnDigits(keypad_digit_t *digits_obj)
 
 			if(row_logic == GPIO_LOW)
 			{
-				if(digits_obj->cursor < 4)
+				if(digits_obj->cursor < NUM_OF_DIGITS)
 				{
 					digits_obj->digits[digits_obj->cursor] = btn_values2[l_row_counter][l_column_counter];
 					digits_obj->pass_digits[digits_obj->cursor] = btn_values2_pass[l_row_counter][l_column_counter];

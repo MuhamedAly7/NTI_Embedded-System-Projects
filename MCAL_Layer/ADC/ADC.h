@@ -14,6 +14,8 @@
 #include "../std_types.h"
 #include "../std_libraries.h"
 #include "../GPIO/GPIO.h"
+#include <util/delay.h>
+#include <avr/io.h>
 
 
 /* ----------------------- Macro Declarations Start ------------------- */
@@ -101,7 +103,6 @@
 
 
 typedef struct{
-	//u8 select_channel           : 5;
 	u8 select_trigger_source    : 3;
 	u8 voltage_reference_select : 2;
 	u8 adjustification_select   : 1;

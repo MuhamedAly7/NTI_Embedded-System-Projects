@@ -8,6 +8,10 @@
 #ifndef ECU_LAYER_KEYPAD_KEYPAD_CFG_H_
 #define ECU_LAYER_KEYPAD_KEYPAD_CFG_H_
 
+/* --------------------- Number of digits ---------------------*/
+#define NUM_OF_DIGITS                  3
+/* ----------------------------------------------------------- */
+
 // lcd port configurations
 #define KEYPAD_PORTA_POS               0
 #define KEYPAD_PORTB_POS               1
@@ -41,7 +45,7 @@
 #define KEYPAD_R3_PIN                 KEYPAD_PIN3_POS
 #define KEYPAD_R4_PIN                 KEYPAD_PIN2_POS
 #define KEYPAD_C1_PIN                 KEYPAD_PIN7_POS
-#define KEYPAD_C2_PIN                 KEYPAD_PIN4_POS // edited for ICU pin
+#define KEYPAD_C2_PIN                 KEYPAD_PIN6_POS // edited for ICU pin
 #define KEYPAD_C3_PIN                 KEYPAD_PIN5_POS
 #define KEYPAD_C4_PIN                 KEYPAD_PIN3_POS
 

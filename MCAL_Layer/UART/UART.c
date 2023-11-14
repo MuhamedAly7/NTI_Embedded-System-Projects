@@ -8,15 +8,17 @@
 #include "UART.h"
 
 
-Error_Status_t UART_Init(void)
+Error_Status_t UART_Init(u32 baud_rate)
 {
 	Error_Status_t ret_status = NO_ERROR;
 
-	u8 baud = 51;
+	//u8 baud = 51;
+	//u8 baud = 107;
+	u32 UBRR_value = UBRR_VALUE(baud_rate);
 
 	// set baud rate
-	UART_CONTROL->UBRRH_UCSRC_CFG = (u8)(baud >> 8);
-	UART_CONTROL->UBRRL_CFG = (u8)(baud);
+	UART_CONTROL->UBRRH_UCSRC_CFG = (u8)(UBRR_value >> 8);
+	UART_CONTROL->UBRRL_CFG = (u8)(UBRR_value);
 
 	// Enable transmitter and receiver
 	u8 rx_tx = (0x01<<4) | (0x01<<3);

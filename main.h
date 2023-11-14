@@ -8,6 +8,7 @@
 #ifndef MAIN_H_
 #define MAIN_H_
 
+/* --------------------------------------- Includes ------------------------------------- */
 #include "MCAL_Layer/GPIO/GPIO.h"
 #include "MCAL_Layer/timer0/timer0.h"
 #include "MCAL_Layer/timer1/timer1.h"
@@ -22,9 +23,12 @@
 #include "ECU_Layer/SevenSegment/seven_segment.h"
 #include "ECU_Layer/lcd/char_lcd.h"
 #include "ECU_Layer/LED/LED.h"
+#include "ECU_Layer/Button/button.h"
 #include "ECU_Layer/EEROM/EEPROM.h"
 #include "ECU_Layer/RTC/RTC.h"
 #include "ECU_Layer/Ultrasonic/Ultrasonic.h"
+#include "ECU_Layer/LM35/LM35.h"
+#include "ECU_Layer/DC_Motor/Motor.h"
 #include <util/delay.h>
 
 #endif /* MAIN_H_ */

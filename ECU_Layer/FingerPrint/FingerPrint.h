@@ -40,6 +40,6 @@ u8 FingerPS_AuraError(void);
 /* Implementing enrollment procedure */
 u8 FingerPS_Enrollment(u8 page_id, u16 *ret_id);
 /* Implement attendance procedure */
-void FingerPS_Attendance(u16 *ret_pageid);
+u8 FingerPS_Attendance(u16 *ret_pageid);
 
 #endif /* ECU_LAYER_FINGERPRINT_FINGERPRINT_H_ */
