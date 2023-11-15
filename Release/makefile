@@ -8,11 +8,6 @@ RM := rm -rf
 
 # All of the sources participating in the build are defined here
 -include sources.mk
--include Mini_projects/small_os_project/subdir.mk
--include Mini_projects/configurable_duty_cycle/subdir.mk
--include Mini_projects/Login_System_Projects/subdir.mk
--include Mini_projects/Cooling_system_project/subdir.mk
--include Mini_projects/Biometric\ Attendance\ System/subdir.mk
 -include MCAL_Layer/timer1/subdir.mk
 -include MCAL_Layer/timer0/subdir.mk
 -include MCAL_Layer/interrupt/subdir.mk

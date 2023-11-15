@@ -10,6 +10,7 @@
 
 /* --------------------------- Includes Start ------------------------- */
 #include "button_cfg.h"
+#include "../../MCAL_Layer/GPIO/GPIO.h"
 
 /* ----------------------- Macro Declarations Start ------------------- */
 

@@ -439,15 +439,15 @@ u8 FingerPS_Attendance(u16 *ret_pageid)
 
 	/* attendance */
 	fp_status &= FingerPS_genImg();
-	_delay_ms(5);
+	_delay_ms(50);
 	fp_status &= FingerPS_convertImg2CharFile(0x01);
-	_delay_ms(5);
+	_delay_ms(50);
 	fp_status &= FingerPS_genImg();
-	_delay_ms(5);
+	_delay_ms(50);
 	fp_status &= FingerPS_convertImg2CharFile(0x02);
-	_delay_ms(5);
+	_delay_ms(50);
 	fp_status &= FingerPS_genTemplate();
-	_delay_ms(5);
+	_delay_ms(50);
 	fp_status &= FingerPS_searchFinger(ret_pageid);
 
 	return fp_status;

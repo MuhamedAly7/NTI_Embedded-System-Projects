@@ -41,10 +41,5 @@ MCAL_Layer/WatchDog \
 MCAL_Layer/interrupt \
 MCAL_Layer/timer0 \
 MCAL_Layer/timer1 \
-Mini_projects/Biometric\ Attendance\ System \
-Mini_projects/Cooling_system_project \
-Mini_projects/Login_System_Projects \
-Mini_projects/configurable_duty_cycle \
-Mini_projects/small_os_project \
 . \
 
