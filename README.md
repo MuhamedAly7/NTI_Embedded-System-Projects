@@ -8,28 +8,28 @@ File Structure
 The project is structured into two main layers:
 
    ## MCAL Layer: Low-level drivers for microcontroller peripherals.
-        Timer1
-        Timer0
-        Interrupt
-        WatchDog
-        UART
-        SPI
-        I2C
-        GPIO
-        ADC
+   - Timer1
+   - Timer0
+   - Interrupt
+   - WatchDog
+   - UART
+   - SPI
+   - I2C
+   - GPIO
+   - ADC
 
    ## ECU Layer: High-level drivers for Electronic Control Units.
-        LCD
-        Ultrasonic
-        Seven-Segment
-        RTC (Real-Time Clock)
-        LM35 (Temperature Sensor)
-        LED
-        Keypad
-        Fingerprint
-        EEROM
-        DC Motor
-        Button
+   - LCD
+   - Ultrasonic
+   - Seven-Segment
+   - RTC (Real-Time Clock)
+   - LM35 (Temperature Sensor)
+   - LED
+   - Keypad
+   - Fingerprint
+   - EEROM
+   - DC Motor
+   - Button
 
 Build Configuration
 
